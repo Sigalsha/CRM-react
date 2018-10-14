@@ -1,0 +1,8 @@
+#search-container {
+    height: 10%;
+    width: 100%;
+    border: 1% solid black;
+    font-size: 1em;
+    color: black;
+    padding: 1%;
+}

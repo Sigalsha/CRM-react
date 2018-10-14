@@ -1,0 +1,40 @@
+#updateClientContainer {
+    height: 100%;
+    width: 63%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    text-align: left;
+    font-size: 0.9em;
+    margin-left: 2%;
+    padding: 1%;
+}
+
+
+.updateHeader{
+    width: 30%;
+    margin-top: 1%;
+}
+
+.select{
+    width: 30%;
+    border-color: lightgray;
+    text-align: center;
+    margin-left: 2%;
+    padding-bottom: 2%;
+    
+}
+
+
+.lightBtn{
+    width: 30%;
+    margin-left: 5%;
+    margin-top: 1%;
+    text-transform: uppercase;
+    color: 
+}
+
+.emptyDiv {
+    width: 32%;
+    
+}
