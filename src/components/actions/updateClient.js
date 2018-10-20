@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import '../../styles/actions/updateClient.css'
 
 
@@ -9,26 +9,42 @@ class UpdateClient extends Component {
         this.state = {
             owners: this.props.owners,
             emailType: this.props.emailType,
+            newOwner: "",
+            newEmailType: "",
+            sold: false
         }
     }
 
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
+    handleOwnerChange = (event) => {
+        const value = event.target.value
         this.setState({
-            [name]: value
+            newOwner: value
         });
     }
 
-    handleChange = (selected) => {
-        console.log(selected)
-        this.setState({ ownerSelectedOption: selected.value });
+    handleEmailTypeChange = (event) => {
+        const value = event.target.value
+        this.setState({
+            newEmailType: value
+        });
     }
 
-    handleTransfer = (ownerSelectedOption) => {
-        this.props.changeOwner(ownerSelectedOption)
+    changeOwner = () => {
+        this.props.updateClient(this.state.newOwner)
+    }
+
+    changeEmailType = () => {
+        this.props.updateClient(this.state.newEmailType)
+    }
+
+    declareSold = () => {
+        if (this.state.sold) {
+            alert("Sale was already declared!")
+        } else {
+            this.setState({
+                sold: true
+            }, () => this.props.updateClient(this.state.sold))
+        }
     }
 
     render() {
@@ -39,16 +55,26 @@ class UpdateClient extends Component {
         return (
             <div id="updateClientContainer">
                 <UpdateHeader text={"Transfer ownership to:"} />
-                <Select list={"owners"} placeholder={"Owner"} onChange={this.handleChange} id={"owners"} mapList={owners} />
-                <UpdateButton onClick={this.handleTransfer} text={"transfer"} />
+                <Select 
+                    list={owners} 
+                    placeholder={"Owner"} 
+                    onChange={this.handleOwnerChange} 
+                    id={owners} 
+                    mapList={owners} />
+                <UpdateButton onClick={this.changeOwner} text={"transfer"} />
 
                 <UpdateHeader text={"Send email:"} />
-                <Select list={"emailType"} placeholder={"emailType"} onChange={this.handleChange} id={"emailType"} mapList={emailType} />
-                <UpdateButton onClick={this.handleClick} text={"send"} />
+                <Select 
+                    list={emailType} 
+                    placeholder={emailType} 
+                    onChange={this.handleEmailTypeChange} 
+                    id={emailType} 
+                    mapList={emailType} />
+                <UpdateButton onClick={this.changeEmailType} text={"send"} />
 
                 <UpdateHeader text={"Declare sale!"} />
                 <div className="emptyDiv"></div>
-                <UpdateButton onClick={this.handleClick} text={"declare"} id="declareBtn" />
+                <UpdateButton onClick={this.declareSold} text={"declare"} id="declareBtn" />
             </div>
         )
     }
@@ -60,13 +86,17 @@ const UpdateHeader = ({ text }) => {
     )
 }
 
-const Select = ({ list, placeholder, onChange, id, mapList}) => {
+const Select = ({ list, placeholder, onChange, id, mapList }) => {
     return (
         <div className="select">
-            <input className="inputText" type="text" list={list} placeholder={placeholder} onChange={onChange} />
+            <input
+                className="inputText" type="text"
+                list={list}
+                placeholder={placeholder}
+                onChange={onChange} />
             <datalist id={id}>
                 {mapList.map((item) =>
-                    <option value={item} />
+                    <option value={item} key={item} />
                 )}
             </datalist>
         </div>

@@ -17,7 +17,7 @@ class ClientInput extends Component {
                 <input className="inputClientName" type="text" list="clients" placeholder="Client Name" onChange={this.handleChange} />
                 <datalist id="clients">
                     {clients.map(client =>
-                        <option value={client.name}  />
+                        <option value={client.name} key={client._id}  />
                     )}
                 </datalist>
             </div>
