@@ -1,0 +1,48 @@
+#addClient-container {
+    width: 97%;
+    margin-left: 2%;
+    padding: 1%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    text-align: left;
+    font-size: 0.9em;
+    color: black;
+}
+
+.inputHeader {
+    width: 10%;
+    height: 10%;
+    background-color: transparent;
+    margin-top: 1%;
+}
+
+.input-addClient {
+    width: 15%; 
+    background-color: transparent;
+    border-style: solid; 
+    border-width: 0px 0px 1px 0px; 
+    border-color: lightgray;
+    color: black;
+    margin-right: 70%;
+    margin-top: 1%;
+
+}
+
+#addNewClientBtn {
+    width: 25%;
+    background-color: #F7CE3E;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    margin-top: 1.5%;
+
+
+}
+
+#addNewClientBtn:hover {
+    cursor: pointer;
+}

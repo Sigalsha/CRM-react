@@ -44,9 +44,6 @@ class Actions extends Component {
         const owners = data.map(c => {
             return c.owner
         })
-        owners.filter((elem, pos, arr) => {
-            return arr.indexOf(elem) === pos;
-        })
         return owners
     }
 
@@ -120,7 +117,7 @@ class Actions extends Component {
         clients.push(newClient)
         this.setState({
             clients: clients
-        }, ()=> console.log(clients[clients.length - 1]))
+        }, ()=> alert(`${clients[clients.length - 1].name} has been added`))
     }
 
     render() {
@@ -133,6 +130,7 @@ class Actions extends Component {
                 <div className="actions-child"><ActionHeader text={"update"} /></div>
                 <div className="actions-child"><ClientInput clients={clients} getCurrentClient={this.getCurrentClient} /></div>
                 <div className="actions-child"><UpdateClient owners={owners} emailType={emailType} changeOwner={this.changeOwner} /></div>
+                <div id="section"></div>
                 <div className="actions-child"><ActionHeader text={"add client"} /></div>
                 <div className="actions-child"><AddClient addNewClient={this.addNewClient} /></div>
             </div>

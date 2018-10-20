@@ -22,7 +22,16 @@
     text-align: center;
     margin-left: 2%;
     padding-bottom: 2%;
-    
+
+}
+
+.inputText {
+    width: 80%;
+    text-align: center;
+    background-color: transparent;
+    border-style: solid; 
+    border-width: 0px 0px 1px 0px;  
+    border-color: lightgray;
 }
 
 
@@ -31,10 +40,14 @@
     margin-left: 5%;
     margin-top: 1%;
     text-transform: uppercase;
-    color: 
+    color: #F7CE3E;
+    font-weight: bold;
+}
+
+.lightBtn:hover {
+    cursor: pointer;
 }
 
 .emptyDiv {
     width: 32%;
-    
 }

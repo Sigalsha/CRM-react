@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-// import '.../styles/general/navbar.css';
-import Select from 'react-select';
 import '../../styles/actions/updateClient.css'
 
 
@@ -10,11 +8,7 @@ class UpdateClient extends Component {
         super(props)
         this.state = {
             owners: this.props.owners,
-            ownerSelectedOption: null,
-            ownerOptions: this.props.owners.map(owner => ({ label: owner, value: owner })),
             emailType: this.props.emailType,
-            emailTypeOptions: this.props.emailType.map(opt => ({ label: opt, value: opt })),
-            emailTypeSelectedOption: null
         }
     }
 
@@ -38,24 +32,23 @@ class UpdateClient extends Component {
     }
 
     render() {
-        const { 
-            ownerSelectedOption, 
-            ownerOptions, 
-            emailTypeOptions, 
-            emailTypeSelectedOption } = this.state;
+        const {
+            owners,
+            emailType } = this.state;
+
         return (
             <div id="updateClientContainer">
-                    <UpdateHeader text={"Transfer ownership to:"} />
-                    <Select className="select" options={ownerOptions} value={ownerSelectedOption} placeholder={"Owner"} onChange={this.handleChange} />
-                    <UpdateButton onClick={this.handleTransfer} text={"transfer"} />
-    
-                    <UpdateHeader text={"Send email:"} />
-                    <Select className="select" options={emailTypeOptions} value={emailTypeSelectedOption} placeholder={"Email Type"} onChange={this.handleChange} />
-                    <UpdateButton onClick={this.handleClick} text={"send"} />
-    
-                    <UpdateHeader text={"Declare sale!"} />
-                    <div className="emptyDiv"></div>
-                    <UpdateButton onClick={this.handleClick} text={"declare"} id="declareBtn" />
+                <UpdateHeader text={"Transfer ownership to:"} />
+                <Select list={"owners"} placeholder={"Owner"} onChange={this.handleChange} id={"owners"} mapList={owners} />
+                <UpdateButton onClick={this.handleTransfer} text={"transfer"} />
+
+                <UpdateHeader text={"Send email:"} />
+                <Select list={"emailType"} placeholder={"emailType"} onChange={this.handleChange} id={"emailType"} mapList={emailType} />
+                <UpdateButton onClick={this.handleClick} text={"send"} />
+
+                <UpdateHeader text={"Declare sale!"} />
+                <div className="emptyDiv"></div>
+                <UpdateButton onClick={this.handleClick} text={"declare"} id="declareBtn" />
             </div>
         )
     }
@@ -64,6 +57,19 @@ class UpdateClient extends Component {
 const UpdateHeader = ({ text }) => {
     return (
         <div className="updateHeader">{text}</div>
+    )
+}
+
+const Select = ({ list, placeholder, onChange, id, mapList}) => {
+    return (
+        <div className="select">
+            <input className="inputText" type="text" list={list} placeholder={placeholder} onChange={onChange} />
+            <datalist id={id}>
+                {mapList.map((item) =>
+                    <option value={item} />
+                )}
+            </datalist>
+        </div>
     )
 }
 
