@@ -59,7 +59,7 @@ router.put('/clients', function (req, res) {
 })
 
 router.get('/actions', function (req, res) {
-    Client.find((err, data) => {
+    Client.find({ _id: id, name: name, owner: owner },(err, data) => {
         if (err) {
             console.log(err);
         }

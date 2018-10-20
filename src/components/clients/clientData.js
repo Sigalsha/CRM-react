@@ -7,7 +7,6 @@ import '../../styles/clients/clientData.css'
 class ClientData extends Component {
     constructor(props) {
         super(props);
-        // console.log(this.props)
         this.state = {
             showPopup: false,
             id: this.props.id,
