@@ -7,29 +7,31 @@ import '../../styles/clients/clientData.css'
 class ClientData extends Component {
     constructor(props) {
         super(props);
+        const { id, name, country } = this.props;
         this.state = {
             showPopup: false,
-            id: this.props.id,
-            firstName: this.props.name.split(" ")[0],
-            sureName: this.props.name.split(" ")[1],
-            country: this.props.country
+            id,
+            firstName: name.split(" ")[0],
+            sureName: name.split(" ")[1],
+            country
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.togglePopup = this.togglePopup.bind(this)
+        this.togglePopup = this.togglePopup.bind(this);
 
     }
 
     togglePopup = () => {
+        const { showPopup } = this.state;
         this.setState({
-            showPopup: !this.state.showPopup
+            showPopup: !showPopup
         });
     }
 
     handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
+        const { target } = event;
+        const { value } = target;
+        const { name } = target;
 
         this.setState({
             [name]: value
@@ -38,46 +40,49 @@ class ClientData extends Component {
 
     handleSubmit = () => {
         let newObject = {};
-        let {id,firstName,sureName,country} = this.state;
-        newObject.id=id;
-        newObject.name=firstName + " " + sureName;
-        newObject.country=country;
+        const { submitInputChange } = this.props;
+        let { id,firstName, sureName, country } = this.state;
+        newObject.id = id;
+        newObject.name = firstName + " " + sureName;
+        newObject.country = country;
 
-        this.props.submitInputChange(newObject)
-        this.togglePopup()
+        submitInputChange(newObject);
+        this.togglePopup();
     }
 
     render() {
-        let name = this.props.name.split(" ")[0]
-        let sureName = this.props.name.split(" ")[1]
+        const { name, emailType, sold, owner } = this.props;
+        const { id, firstName, sureName, country, showPopup } = this.state;
+        let fixedName = name.split(" ")[0];
+        let sureName = name.split(" ")[1];
         let firstContact = this.props.firstContact.split("T")[0]
         return (
             <div>
-                {this.state.showPopup ?
+                {showPopup ?
                     (<PopUp
-                        id={this.state.id}
+                        id={id}
                         togglePopup={this.togglePopup}
-                        firstName={this.state.firstName}
-                        sureName={this.state.sureName}
-                        country={this.state.country}
+                        firstName={firstName}
+                        sureName={sureName}
+                        country={country}
                         handleInputChange={this.handleInputChange}
                         handleSubmit={this.handleSubmit}
                          />)
                     : ("")
                 }
-                <div className="row-container" id={this.props.id} onClick={this.togglePopup}>
-                    <div className="rowItem">{name}</div>
+                <div className="row-container" id={id} onClick={this.togglePopup}>
+                    <div className="rowItem">{fixedName}</div>
                     <div className="rowItem">{sureName}</div>
-                    <div className="rowItem">{this.props.country}</div>
+                    <div className="rowItem">{country}</div>
                     <div className="rowItem">{firstContact}</div>
-                    <div className="rowItem">{this.props.emailType}</div>
+                    <div className="rowItem">{emailType}</div>
                     <div className="rowItem">
-                        {this.props.sold ?
+                        {sold ?
                             (<span><strong>V</strong></span>) :
                             ("-")
                         }
                     </div>
-                    <div className="rowItem">{this.props.owner}</div>
+                    <div className="rowItem">{owner}</div>
                 </div>
             </div>
         )

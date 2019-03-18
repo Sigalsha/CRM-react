@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 import './App.css';
 import Navbar from './components/general/navbar.js'
 import Landing from './components/general/landing.js'
@@ -8,16 +9,15 @@ import Actions from './components/actions/actions.js'
 // import ClientInput from './components/actions/clientInput.js'
 // import AddClient from './components/actions/addClient.js'
 // import Update from './components/actions/update.js'
-import Badges from './components/analytics/badges/badges.js'
+// import Badges from './components/analytics/badges/badges.js'
 // import Emails from './components/analytics/badges/emails.js'
 // import NewClients from './components/analytics/badges/newClients.js'
 // import OutstandingClients from './components/analytics/badges/outstandingClients.js'
-import Charts from './components/analytics/charts/charts.js'
+// import Charts from './components/analytics/charts/charts.js'
 // import ClientAcquisition from './components/analytics/charts/clientAcquisition.js'
 // import SalesByCountry from './components/analytics/charts/salesByCountry.js'
 // import SalesSinceDate from './components/analytics/charts/salesSinceDate.js'
 // import TopEmployees from './components/analytics/charts/topEmployees.js'
-import Loader from 'react-loader-spinner'
 
 
 class App extends Component {
@@ -68,10 +68,12 @@ class App extends Component {
 
 
   render() {
-    const loading = this.state.loading
+    const {loading} = this.state;
+
     if (loading){
       return <Loader type="Puff" color="#00BFFF" height={150} width={150} />
     }
+    
     return (
       <Router>
         <div className="App">

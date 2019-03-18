@@ -36,12 +36,10 @@
 }
 
 .popUp-container {
-    position: absolute;
-    left: 35%;
-    right: 35%;
-    top: 30%;
-    bottom: 30%;
-    margin: auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color: black;
     opacity: 0.85;
 }

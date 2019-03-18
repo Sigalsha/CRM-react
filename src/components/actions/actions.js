@@ -3,8 +3,9 @@ import ClientInput from './clientInput';
 import UpdateClient from './updateClient.js'
 import AddClient from './addClient.js'
 import Loader from 'react-loader-spinner'
-import axios from 'axios';
 import '../../styles/actions/actions.css'
+import call from '../../ApiCalls/ApiCalls'
+
 
 class Actions extends Component {
     constructor() {
@@ -31,7 +32,7 @@ class Actions extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            let data = require('../../data.json')
+            let data = call.getClients()
             this.setState({
                 loading: false,
                 clients: data,

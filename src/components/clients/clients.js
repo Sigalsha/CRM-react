@@ -5,7 +5,9 @@ import ColumnsHeader from './columnsHeader.js'
 import ClientData from './clientData.js'
 import '../../styles/clients/clients.css'
 import Loader from 'react-loader-spinner'
-import axios from 'axios';
+import call from '../../ApiCalls/ApiCalls'
+
+
 
 class Clients extends Component {
     constructor() {
@@ -30,7 +32,7 @@ class Clients extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            let data = require('../../data.json')
+            let data = call.getClients();
             this.setState({
                 loading: false,
                 clients: data
@@ -40,13 +42,12 @@ class Clients extends Component {
 
 
     submitInputChange = (newObject) => {
-        console.log(newObject)
-        let {id, name, country} = newObject
-        const clients = [...this.state.clients]
-        let index = this.findClientIndex(clients, id)
-        let client = clients[index]
-        client.name = name
-        client.country = country
+        let {id, name, country} = newObject;
+        const clients = [...this.state.clients];
+        let index = this.findClientIndex(clients, id);
+        let client = clients[index];
+        client.name = name;
+        client.country = country;
         this.setState({
             clients: clients
         })
@@ -69,14 +70,14 @@ class Clients extends Component {
     findClientIndex = (clients ,id) => {
         for (let i in clients) {
           if (clients[i]._id === id){
-            return i
+            return i;
           } 
         }
-        return false
+        return false;
     }
 
     render() {
-        const { loading,clients } = this.state
+        const { loading,clients } = this.state;
         if (loading) {
             return <Loader type="Puff" color="#00BFFF" height={150} width={150} />
         }
