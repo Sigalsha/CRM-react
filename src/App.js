@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
-import './App.css';
-import Navbar from './components/general/navbar.js'
-import Landing from './components/general/landing.js'
-import Clients from './components/clients/clients.js'
-import Actions from './components/actions/actions.js'
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Loader from "react-loader-spinner";
+import "./App.css";
+import Navbar from "./components/general/Navbar.js";
+import Landing from "./components/general/Landing.js";
+import Clients from "./components/clients/Clients.js";
+import Actions from "./components/actions/Actions.js";
 // import ClientInput from './components/actions/clientInput.js'
 // import AddClient from './components/actions/addClient.js'
 // import Update from './components/actions/update.js'
@@ -19,18 +19,16 @@ import Actions from './components/actions/actions.js'
 // import SalesSinceDate from './components/analytics/charts/salesSinceDate.js'
 // import TopEmployees from './components/analytics/charts/topEmployees.js'
 
-
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      loading: true
-    }
+      loading: true,
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     setTimeout(() => this.setState({ loading: false }), 1000);
-
   }
   // componentDidMount = async ()=> {
   //   const state = await JSON.parse(localStorage.getItem('state'))
@@ -41,7 +39,7 @@ class App extends Component {
   //       currentUser: state.currentUser,
   //       search: state.search
   //     })
-  //   } 
+  //   }
   // }
 
   // async componentDidMount() {
@@ -54,7 +52,6 @@ class App extends Component {
   //   }, 1000)
   // }
 
-
   // extractFirstName = () => {
   //   const costumers = [...this.state.costumers]
   //   const costumersNames = costumers.filter(costumer => {
@@ -66,14 +63,13 @@ class App extends Component {
   //   console.log(costumersNames)
   // }
 
-
   render() {
-    const {loading} = this.state;
+    const { loading } = this.state;
 
-    if (loading){
-      return <Loader type="Puff" color="#00BFFF" height={150} width={150} />
+    if (loading) {
+      return <Loader type="Puff" color="#00BFFF" height={150} width={150} />;
     }
-    
+
     return (
       <Router>
         <div className="App">
@@ -83,9 +79,9 @@ class App extends Component {
           <div>
             <Route path="/" exact component={Landing} />
             <Route path="/clients" exact component={Clients} />
-            <Route path="/actions" exact component={Actions}/>
-    
-            {/* <Route path="/analytics" exact component={Analytics}/> */} 
+            <Route path="/actions" exact component={Actions} />
+
+            {/* <Route path="/analytics" exact component={Analytics}/> */}
           </div>
         </div>
       </Router>
