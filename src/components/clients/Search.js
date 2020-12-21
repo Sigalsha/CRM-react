@@ -5,18 +5,18 @@ import "../../styles/clients/search.css";
 class Search extends Component {
   constructor() {
     super();
-    this.state = {
-      search: "",
-    };
   }
-
+  /* 
   handleSearch = (e) => {
-    const { searchClients } = this.props;
+    this.props;
+    /*   const { searchClients } = this.props;
     const { search } = this.state;
-    let clientSearched = e.target.value.toLowerCase();
-    this.searchClients(clientSearched);
-    // this.setState({ search: "" })
-  };
+    this.setState({ search: e.target.value.toLowerCase() });
+
+    console.log(search); */
+
+  // this.setState({ search: "" })
+  // };
 
   render() {
     return (
@@ -24,8 +24,8 @@ class Search extends Component {
         <input
           type="text"
           className="search-input"
-          value={this.state.search}
-          onChange={this.handleSearch}
+          value={this.props.searchInput}
+          onChange={this.props.searchClients}
           placeholder="search..."
         />
       </div>

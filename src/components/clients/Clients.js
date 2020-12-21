@@ -1,17 +1,28 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Search from "./Search.js";
 import ColumnsHeader from "./ColumnsHeader.js";
 import ClientData from "./ClientData.js";
 import "../../styles/clients/clients.css";
 import Loader from "react-loader-spinner";
 import call from "../../ApiCalls/ApiCalls";
+import ClientsFilter from "./ClientsFilter";
+import { clientsHeaders } from "./clientsHeaders";
+import ClientsPagination from "./ClientsPagination";
+
+const itemsPerPage = 20;
 
 class Clients extends Component {
   constructor() {
     super();
     this.state = {
       loading: true,
+      searchInput: "",
+      searchedClients: [],
+      clients: [],
+      selectedPage: 0,
+      pageLimit: 20,
+      selectValue: "Name",
+      displayClients: [],
     };
   }
 
@@ -27,13 +38,16 @@ class Clients extends Component {
   //         clients: response.data})
   // }
 
-  componentDidMount() {
+  async componentDidMount() {
     setTimeout(() => {
       let data = call.getClients();
-      this.setState({
-        loading: false,
-        clients: data,
-      });
+      this.setState(
+        {
+          loading: false,
+          clients: data,
+        },
+        this.updateClientsDisplay
+      );
     }, 1000);
   }
 
@@ -72,34 +86,97 @@ class Clients extends Component {
   };
 
   searchClients = (e) => {
-    const { clients } = this.state;
-    let currentClientsList = [];
-    let newClientsList = [];
-    if (e.target.value !== "") {
-      currentClientsList = clients;
-      newClientsList = currentClientsList.filter((client) => {
-        const lc = client.toLowerCase();
-        const filter = e.target.value.toLowerCase();
-        return lc.includes(filter);
-      });
-    } else {
-      newClientsList = clients;
-    }
+    const { clients, searchInput } = this.state;
 
-    this.setState({
-      clients: newClientsList,
-    });
+    this.setState({ searchInput: e.target.value.toLowerCase() });
+    console.log(searchInput);
+    let newClientsList = searchInput.length
+      ? clients.filter((client) => client.name.includes(searchInput))
+      : [];
+    if (newClientsList.length) {
+      this.setState({
+        searchedClients: newClientsList,
+      });
+    }
   };
 
+  updateDisplayByPage = (pageDirection, pageNum) => {
+    const { pageLimit, clients } = this.state;
+    let itemsAmount = itemsPerPage * pageDirection;
+    let newDisplay = 0;
+    if (pageLimit + itemsAmount >= clients.length) {
+      newDisplay = clients.length;
+    } else if (pageLimit + itemsAmount <= 20) {
+      newDisplay = 20;
+    } else if (pageNum && pageNum !== 0) {
+      newDisplay = pageNum * 20;
+    } else {
+      newDisplay = pageLimit + itemsAmount;
+    }
+    console.log("newDisplay: ", newDisplay);
+
+    this.setState({ pageLimit: newDisplay }, this.updateClientsDisplay);
+  };
+
+  updateClientsDisplay = () => {
+    let currentFilter = this.state.selectValue;
+    let filterValue = this.state.searchInput.toLowerCase();
+    let currentClients =
+      this.state.clients &&
+      this.state.clients.slice(this.state.pageLimit - 20, this.state.pageLimit);
+
+    if (!filterValue) {
+      return this.setState({ displayClients: currentClients });
+    }
+
+    let displayClients = currentClients.filter((c) => {
+      if (currentFilter === "Sold") {
+        return this.handleBoolFilter(c, currentFilter, filterValue);
+      }
+      return (c[clientsHeaders[currentFilter]] || "")
+        .toLowerCase()
+        .includes(filterValue);
+    });
+    this.setState({ displayClients });
+  };
+
+  updateSearchInput = (e) =>
+    this.setState({ searchInput: e.target.value }, this.updateClientsDisplay);
+  updateFilterSelect = (e) =>
+    this.setState({ selectValue: e.target.value }, this.updateClientsDisplay);
+
   render() {
-    const { loading, clients } = this.state;
+    const {
+      loading,
+      clients,
+      searchInput,
+      searchedClients,
+      pageLimit,
+      selectValue,
+      pageCount,
+    } = this.state;
     if (loading) {
       return <Loader type="Puff" color="#00BFFF" height={150} width={150} />;
     }
     return (
       <div id="clients-container">
         <div className="clients-child">
-          <Search searchClients={this.searchClients} />
+          <ClientsFilter clients={clients} />
+          {/*         <Search
+            searchClients={this.searchClients}
+            searchInput={searchInput}
+          /> */}
+        </div>
+        <div className="clients-child">
+          <ClientsPagination
+            updateDisplayByPage={this.updateDisplayByPage}
+            pageLimit={pageLimit}
+            searchInput={searchInput}
+            selectValue={selectValue}
+            updateSearchInput={this.updateSearchInput}
+            updateFilterSelect={this.updateFilterSelect}
+            pageCount={Math.ceil(this.state.clients.length / itemsPerPage)}
+          />
         </div>
         <div className="clients-child">
           <ColumnsHeader />
@@ -107,7 +184,8 @@ class Clients extends Component {
         <div className="clients-child">
           <RowContainer
             submitInputChange={this.submitInputChange}
-            clients={clients}
+            clients={this.state.displayClients}
+            searchedClients={searchedClients}
           />
         </div>
       </div>
@@ -115,10 +193,11 @@ class Clients extends Component {
   }
 }
 
-const RowContainer = ({ clients, submitInputChange }) => {
+const RowContainer = ({ clients, submitInputChange, searchedClients }) => {
+  let clientsToDisplay = searchedClients.length ? searchedClients : clients;
   return (
     <div>
-      {clients.map((c) => {
+      {clientsToDisplay.map((c) => {
         return (
           <ClientData
             id={c._id}
@@ -138,3 +217,15 @@ const RowContainer = ({ clients, submitInputChange }) => {
 };
 
 export default Clients;
+
+/*
+
+  handlePageClick = ({ selected: selected }) => {
+    console.log(selected);
+
+    this.setState({ selectedPage: selected + 1 });
+    console.log(this.state.selectedPage);
+  };
+
+
+*/
