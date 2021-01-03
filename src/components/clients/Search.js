@@ -1,36 +1,19 @@
-import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
+import React from "react";
 import "../../styles/clients/search.css";
 
-class Search extends Component {
-  constructor() {
-    super();
-  }
-  /* 
-  handleSearch = (e) => {
-    this.props;
-    /*   const { searchClients } = this.props;
-    const { search } = this.state;
-    this.setState({ search: e.target.value.toLowerCase() });
-
-    console.log(search); */
-
-  // this.setState({ search: "" })
-  // };
-
-  render() {
-    return (
-      <div id="search-container">
-        <input
-          type="text"
-          className="search-input"
-          value={this.props.searchInput}
-          onChange={this.props.searchClients}
-          placeholder="search..."
-        />
-      </div>
-    );
-  }
-}
+// TODO - change it to mapList
+const Search = ({ searchInput, updateSearchInput }) => {
+  return (
+    <div id="search-container">
+      <input
+        type="text"
+        className="search-input"
+        value={searchInput}
+        onChange={updateSearchInput}
+        placeholder="search client"
+      />
+    </div>
+  );
+};
 
 export default Search;

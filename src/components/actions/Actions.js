@@ -5,6 +5,8 @@ import AddClient from "./AddClient.js";
 import Loader from "react-loader-spinner";
 import "../../styles/actions/actions.css";
 import call from "../../ApiCalls/ApiCalls";
+import utils from "../../utils/utils";
+import { clientsHeaders } from "../../utils/consts";
 
 class Actions extends Component {
   constructor() {
@@ -35,24 +37,26 @@ class Actions extends Component {
       this.setState({
         loading: false,
         clients: data,
-        owners: this.reduceDuplications(this.getOwners(data)),
+        owners: utils.reduceDuplications(
+          utils.getClientProperty(clientsHeaders["owner"], data)
+        ),
         currentClient: "",
       });
     }, 1000);
   }
 
-  getOwners = (data) => {
+  /*   getOwners = (data) => {
     const owners = data.map((c) => {
       return c.owner;
     });
     return owners;
-  };
+  }; */
 
-  reduceDuplications = (arrArg) => {
+  /*   reduceDuplications = (arrArg) => {
     return arrArg.filter((elem, pos, arr) => {
       return arr.indexOf(elem) === pos;
     });
-  };
+  }; */
 
   getCurrentClient = (event) => {
     let clientName = event.target.value;
@@ -92,13 +96,14 @@ class Actions extends Component {
   // console.log(filtered)
   // let index = filtered[0].i
   // // filtered[0].client
-  // // let index = this.findClientIndex(clients, client)
+  // // let index = utils.findClientIndex(clients, client)
   // client.owner = newOwner
   // clients[index].client = client
   // this.setState({
   //     clients: clients
   // })
 
+  // TODO - remove, since imported from utils
   findClientIndex = (clients, client) => {
     for (let i in clients) {
       if (clients[i].client === client) {
@@ -165,7 +170,7 @@ class Actions extends Component {
             updateClient={this.updateClient}
           />
         </div>
-        <div id="section"></div>
+        <div id="section" />
         <div className="actions-child">
           <ActionHeader text={"add client"} />
         </div>

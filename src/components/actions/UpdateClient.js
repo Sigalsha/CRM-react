@@ -55,7 +55,7 @@ class UpdateClient extends Component {
         <UpdateHeader text={"Transfer ownership to:"} />
         <Select
           list={owners}
-          placeholder={"Owner"}
+          placeholder="Owner"
           onChange={this.handleOwnerChange}
           id={owners}
           mapList={owners}
@@ -73,7 +73,7 @@ class UpdateClient extends Component {
         <UpdateButton onClick={this.changeEmailType} text={"send"} />
 
         <UpdateHeader text={"Declare sale!"} />
-        <div className="emptyDiv"></div>
+        <div className="emptyDiv" />
         <UpdateButton
           onClick={this.declareSold}
           text={"declare"}

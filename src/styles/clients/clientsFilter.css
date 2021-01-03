@@ -1,0 +1,17 @@
+.clients-filter-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .clients-filter-wrapper {
+    align-items: baseline;
+    flex-flow: column;
+  }
+}

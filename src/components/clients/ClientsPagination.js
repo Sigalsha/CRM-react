@@ -4,14 +4,28 @@ import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 
 class ClientsPagination extends Component {
-  constructor() {
-    super();
-    this.state = {
-      currentPage: 1,
-    };
+  constructor(props) {
+    super(props);
+    this.state = { currentPage: 1 };
   }
-  previousDisplay = (pageNum) => this.props.updateDisplayByPage(-1, pageNum);
-  nextDisplay = (pageNum) => this.props.updateDisplayByPage(1, pageNum);
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.isPageReset &&
+      this.props.isPageReset !== prevProps.isPageReset
+    ) {
+      this.setState({ currentPage: 1 });
+    }
+  }
+
+  previousDisplay = (pageNum) => {
+    this.props.updateDisplayByPage(-1, pageNum);
+    this.setState({ currentPage: pageNum });
+  };
+  nextDisplay = (pageNum) => {
+    this.props.updateDisplayByPage(1, pageNum);
+    this.setState({ currentPage: pageNum });
+  };
 
   handleSinglePageClick = (number) => {
     const { currentPage } = this.state;
@@ -20,18 +34,25 @@ class ClientsPagination extends Component {
     } else if (currentPage < number) {
       this.nextDisplay(number);
     }
-    this.setState({
-      currentPage: number,
-    });
   };
 
   render() {
     const { currentPage } = this.state;
-    console.log("currentPage: ", currentPage);
+    const { pageCount } = this.props;
+    let current = currentPage;
+    console.log("current: ", current);
+
     return (
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+        }}
+      >
         <span
-          onClick={() => this.previousDisplay(0)}
+          onClick={() =>
+            this.previousDisplay(current > 1 ? current - 1 : current)
+          }
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -44,22 +65,27 @@ class ClientsPagination extends Component {
           />
           previous
         </span>
-        {/*         <span>
-          {" "}
-          {this.props.pageLimit - 20} - {this.props.pageLimit}{" "}
-        </span> */}
         <PageNumbers
           pageCount={this.props.pageCount}
           pageLimit={this.props.pageLimit}
           handleSinglePageClick={this.handleSinglePageClick}
         />
+
+        {/*      <div>
+          <span>
+            {" "}
+            {this.props.pageLimit - 20} - {this.props.pageLimit}{" "}
+          </span>
+        </div> */}
+
         <span
-          onClick={() => this.nextDisplay(0)}
+          onClick={() =>
+            this.nextDisplay(current < pageCount ? current + 1 : current)
+          }
           style={{
             display: "inline-flex",
             alignItems: "center",
-            cursor:
-              currentPage === this.props.pageCount ? "not-allowed" : "pointer",
+            cursor: currentPage === pageCount ? "not-allowed" : "pointer",
           }}
         >
           next
@@ -74,17 +100,15 @@ class ClientsPagination extends Component {
 }
 
 const PageNumbers = ({ pageCount, handleSinglePageClick, pageLimit }) => {
+  console.log("pageNumbers, pageCount: ", pageCount);
+  console.log("pageNumbers, pageLimit: ", pageLimit);
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(pageCount); i++) {
     pageNumbers.push(i);
   }
-  const firstTenPages = [];
-  for (let i = 1; i < 11; i++) {
-    firstTenPages.push(i);
-  }
 
   function handlePageClick(e) {
-    e.preventDefault();
     handleSinglePageClick(Number(e.target.id));
   }
 
@@ -104,7 +128,8 @@ const PageNumbers = ({ pageCount, handleSinglePageClick, pageLimit }) => {
             id={num}
             style={{
               paddingRight: "5px",
-              color: pageLimit / 20 === num ? "blue" : "black",
+              color: Math.ceil(pageLimit / 20) === num ? "blue" : "black",
+              cursor: "pointer",
             }}
             onClick={handlePageClick}
           >
