@@ -18,6 +18,7 @@ const Badges = ({ badges }) => {
             <FontAwesomeIcon icon={badge.icon} className="badge-icon" />
             <div className="badge-header">{badge.header}</div>
             <p className="badge-desc">{badge.description}</p>
+            <h2>{badge.result}</h2>
           </div>
         );
       })}

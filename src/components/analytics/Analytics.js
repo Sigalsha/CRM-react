@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Loader from "react-loader-spinner";
-import { badges } from "../../utils/consts";
 import Badges from "./badges/Badges";
 import "../../styles/analytics/analytics.css";
 import call from "../../ApiCalls/ApiCalls";
@@ -12,6 +11,7 @@ import {
   faUserPlus,
   faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
+import TopEmployees from "./charts/TopEmployees";
 
 class Analytics extends Component {
   constructor() {
@@ -36,13 +36,16 @@ class Analytics extends Component {
   }
 
   getBadges = () => {
+    const { clients } = this.state;
     return [
       {
         id: 1,
-        name: "newClients",
+        name: "longTimeClients",
         icon: faUsers,
-        header: "New Clients",
-        description: "new clients joined this month",
+        header: "Long-time Clients",
+        description: "clients who joined before 2018",
+        result: clients.filter((c) => utils.isFromBefore2018(c.firstContact))
+          .length,
       },
       {
         id: 2,
@@ -50,6 +53,7 @@ class Analytics extends Component {
         icon: faEnvelope,
         header: "Emails Sent",
         description: "",
+        result: clients.filter((c) => c.emailType !== null).length,
       },
       {
         id: 3,
@@ -57,6 +61,7 @@ class Analytics extends Component {
         icon: faUserPlus,
         header: "Target Clients",
         description: "clients without acquisition",
+        result: utils.getSales(clients).length,
       },
       {
         id: 4,
@@ -64,12 +69,15 @@ class Analytics extends Component {
         icon: faGlobeAmericas,
         header: "Hottest Country",
         description: "",
+        result: utils.getTopSalesByKey(
+          utils.getSalesByProperty("country", clients)
+        ),
       },
     ];
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, clients } = this.state;
 
     if (loading) {
       return (
@@ -82,6 +90,11 @@ class Analytics extends Component {
     return (
       <div id="analytics-container">
         <Badges badges={this.getBadges()} />
+        <TopEmployees
+          owners={utils.countSalesByKey(
+            utils.getSalesByProperty("owner", clients)
+          )}
+        />
       </div>
     );
   }
