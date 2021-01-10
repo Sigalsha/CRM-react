@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
+import "../../styles/clients/clientsPagination.css";
 
 class ClientsPagination extends Component {
   constructor(props) {
@@ -40,24 +41,16 @@ class ClientsPagination extends Component {
     const { currentPage } = this.state;
     const { pageCount } = this.props;
     let current = currentPage;
-    console.log("current: ", current);
 
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-        }}
-      >
+      <div className="clients-pagination-wrapper">
         <span
+          className={`page-arrow
+            ${currentPage === 1 ? "page-cursor-not-allowed" : "page-cursor"}
+          `}
           onClick={() =>
             this.previousDisplay(current > 1 ? current - 1 : current)
           }
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            cursor: currentPage === 1 ? "not-allowed" : "pointer",
-          }}
         >
           <FontAwesomeIcon
             icon={faArrowCircleLeft}
@@ -70,23 +63,17 @@ class ClientsPagination extends Component {
           pageLimit={this.props.pageLimit}
           handleSinglePageClick={this.handleSinglePageClick}
         />
-
-        {/*      <div>
-          <span>
-            {" "}
-            {this.props.pageLimit - 20} - {this.props.pageLimit}{" "}
-          </span>
-        </div> */}
-
         <span
           onClick={() =>
             this.nextDisplay(current < pageCount ? current + 1 : current)
           }
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            cursor: currentPage === pageCount ? "not-allowed" : "pointer",
-          }}
+          className={`page-arrow
+            ${
+              currentPage === pageCount
+                ? "page-cursor-not-allowed"
+                : "page-cursor"
+            }
+          `}
         >
           next
           <FontAwesomeIcon
@@ -100,9 +87,6 @@ class ClientsPagination extends Component {
 }
 
 const PageNumbers = ({ pageCount, handleSinglePageClick, pageLimit }) => {
-  console.log("pageNumbers, pageCount: ", pageCount);
-  console.log("pageNumbers, pageLimit: ", pageLimit);
-
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(pageCount); i++) {
     pageNumbers.push(i);
@@ -113,24 +97,25 @@ const PageNumbers = ({ pageCount, handleSinglePageClick, pageLimit }) => {
   }
 
   return (
-    <ul
-      style={{
-        display: "flex",
-        listStyleType: "none",
-        justifyContent: "space-evenly",
-        margin: "5px",
-      }}
-    >
+    <ul className="page-numbers">
       {pageNumbers.map((num) => {
         return (
           <li
             key={num}
             id={num}
-            style={{
-              paddingRight: "5px",
-              color: Math.ceil(pageLimit / 20) === num ? "blue" : "black",
-              cursor: "pointer",
-            }}
+            className={`page-number
+              ${
+                Math.ceil(pageLimit / 20) === num
+                  ? "current-page-number"
+                  : "not-current-page"
+              }
+              ${
+                num > Math.ceil(pageLimit / 20) + 10 ||
+                num < Math.ceil(pageLimit / 20) - 10
+                  ? "page-not-in-range"
+                  : ""
+              }
+            `}
             onClick={handlePageClick}
           >
             {num}

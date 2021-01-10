@@ -6,6 +6,7 @@ import Navbar from "./components/general/Navbar.js";
 import Landing from "./components/general/Landing.js";
 import Clients from "./components/clients/Clients.js";
 import Actions from "./components/actions/Actions.js";
+import Analytics from "./components/analytics/Analytics";
 // import ClientInput from './components/actions/clientInput.js'
 // import AddClient from './components/actions/addClient.js'
 // import Update from './components/actions/update.js'
@@ -80,8 +81,7 @@ class App extends Component {
             <Route path="/" exact component={Landing} />
             <Route path="/clients" exact component={Clients} />
             <Route path="/actions" exact component={Actions} />
-
-            {/* <Route path="/analytics" exact component={Analytics}/> */}
+            <Route path="/analytics" exact component={Analytics} />
           </div>
         </div>
       </Router>

@@ -12,6 +12,7 @@
 #clients-container {
   width: 98%;
   height: 100%;
+  margin-top: 10px;
   margin-left: 1%;
   margin-right: 1%;
   background-color: #ecf0f1;
@@ -19,49 +20,53 @@
 
 .clients-child {
   width: 100%;
+  margin-top: 5px;
 }
 
-.pagination {
+table {
+  width: 100%;
+}
+
+/* .pagination {
   display: flex;
   justify-content: space-between;
   list-style: none;
   padding-top: 10px;
   margin-top: 5px;
-}
+} */
 
-.pagination a {
+/* .pagination a {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #6c7ac9;
-  /*   text-decoration: none; */
-  cursor: pointer;
-}
+   cursor: pointer; 
+}  
 
-.pagination a:hover {
+/* .pagination a:hover {
   text-decoration: none;
-}
+} */
 
-.pagination a:active {
+/* .pagination a:active {
   border-color: transparent;
-}
+} */
 
-.pagination a:disabled {
+/* .pagination a:disabled {
   cursor: not-allowed;
-}
+} */
 
-.pagination-active-a {
+/* .pagination-active-a {
   color: #fff;
   background: #6c7ac9;
   border-color: transparent;
-}
+} */
 
-.pagination-disabled-a {
+/* .pagination-disabled-a {
   color: rgb(198, 197, 202);
   border: 1px solid rgb(198, 197, 202);
   cursor: not-allowed;
-}
+} */
 
-.pagination-next-prev {
+/* .pagination-next-prev {
   color: #6c7ac9;
 }
 
@@ -71,4 +76,16 @@
 
 .pagination-disabled-a .pagination-next-prev:hover {
   cursor: inherit;
+} */
+
+@media screen and (max-width: 700px) {
+  .clients-child {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .clients-child {
+    font-size: 10px;
+  }
 }

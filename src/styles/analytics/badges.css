@@ -1,0 +1,35 @@
+.badges-wrapper {
+  /* width: 50%; */
+  height: 100%;
+  /*  min-height: 400px; */
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  /*  margin: 20px; */
+  padding: 10px;
+}
+
+.badge {
+  background-color: #777;
+  border-radius: 10px;
+  padding: 3px 7px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 10px;
+  width: 22%;
+  height: 120px;
+  /* margin: 5px auto auto auto; */
+}
+
+.badge-icon {
+  font-size: 40px;
+}
+
+.badge-header {
+  font-size: 2em;
+}
+
+.badge-desc {
+  font-size: 14px;
+  text-align: center;
+}

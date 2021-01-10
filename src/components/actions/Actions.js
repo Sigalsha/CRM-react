@@ -45,19 +45,6 @@ class Actions extends Component {
     }, 1000);
   }
 
-  /*   getOwners = (data) => {
-    const owners = data.map((c) => {
-      return c.owner;
-    });
-    return owners;
-  }; */
-
-  /*   reduceDuplications = (arrArg) => {
-    return arrArg.filter((elem, pos, arr) => {
-      return arr.indexOf(elem) === pos;
-    });
-  }; */
-
   getCurrentClient = (event) => {
     let clientName = event.target.value;
     const clients = [...this.state.clients];

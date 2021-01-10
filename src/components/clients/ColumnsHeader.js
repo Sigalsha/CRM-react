@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import "../../styles/clients/columnsHeader.css";
 import { clientsHeaders } from "../../utils/consts";
 
-class ColumnsHeader extends Component {
-  render() {
-    return (
-      <div id="columnsHeader-Container">
+const ColumnsHeader = () => {
+  return (
+    <thead>
+      <tr id="columns-header-container">
         {Object.keys(clientsHeaders).map((header, i) => (
           // header[i] === header[i].toUpperCase() ? header[i].toLowerCase() + slice(header, header[i]) : header[i]
-          <div className="column-header" key={i}>
+          <th className="column-header" key={i}>
             {header}
-          </div>
+          </th>
         ))}
-      </div>
-    );
-  }
-}
+      </tr>
+    </thead>
+  );
+};
 
 export default ColumnsHeader;

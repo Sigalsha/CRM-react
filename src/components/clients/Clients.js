@@ -6,9 +6,10 @@ import "../../styles/clients/clients.css";
 import Loader from "react-loader-spinner";
 import call from "../../ApiCalls/ApiCalls";
 import ClientsFilter from "./ClientsFilter";
-import { clientsHeaders } from "../../utils/consts";
 import ClientsPagination from "./ClientsPagination";
 import utils from "../../utils/utils";
+import ClientRow from "./ClientRow.js";
+import EditClientPopUp from "./EditClientPopUp";
 
 const itemsPerPage = 20;
 
@@ -17,6 +18,8 @@ class Clients extends Component {
     super();
     this.state = {
       loading: true,
+      showPopup: false,
+      clientToEdit: {},
       searchInput: "",
       clients: [],
       pageCount: 0,
@@ -55,14 +58,22 @@ class Clients extends Component {
   }
 
   submitInputChange = (newObject) => {
+    // TODO - check why client isn't get updated after setState of updated clients !!!
     let { id, name, country } = newObject;
-    const clients = [...this.state.clients];
+    const clients = [...this.state.currentClients];
     let index = utils.findClientIndexById(clients, id);
     let client = clients[index];
     client.name = name;
     client.country = country;
     this.setState({
-      clients: clients,
+      currentClients: clients,
+      showPopup: !this.state.showPopup,
+      clientToEdit: {
+        id: null,
+        name: "",
+        sureName: "",
+        country: "",
+      },
     });
     /*put req. to the server, updating the client
             axios.put('http://localhost:8100/clients', {
@@ -77,6 +88,19 @@ class Clients extends Component {
             console.log(err);
           });
           */
+  };
+
+  toggleEditClient = (client = null) => {
+    const { showPopup } = this.state;
+    this.setState({
+      showPopup: !showPopup,
+      clientToEdit: client && {
+        id: client.id,
+        name: client.firstName,
+        sureName: client.sureName,
+        country: client.country,
+      },
+    });
   };
 
   updateDisplayByPage = (pageDirection, pageNum) => {
@@ -94,26 +118,24 @@ class Clients extends Component {
         currentPageDisplay = clientsToDisplay.slice(0, itemsPerPage);
         currentPageLimit = 20;
       } else {
-        currentPageDisplay = clientsToDisplay.slice(
-          pageIndex - itemsPerPage,
+        currentPageDisplay = this.updateCurrentPageDisplay(
+          clientsToDisplay,
+          itemsPerPage,
           pageIndex
         );
         currentPageLimit = currentPageLimit - itemsPerPage;
       }
     } else {
       if (pageNum >= pageCount) {
-        currentPageDisplay = clientsToDisplay.slice(
-          pageIndex - itemsPerPage,
-          pageIndex
-        );
         currentPageLimit = pageCount * itemsPerPage;
       } else {
-        currentPageDisplay = clientsToDisplay.slice(
-          pageIndex - itemsPerPage,
-          pageIndex
-        );
         currentPageLimit = currentPageLimit + itemsPerPage;
       }
+      currentPageDisplay = this.updateCurrentPageDisplay(
+        clientsToDisplay,
+        itemsPerPage,
+        pageIndex
+      );
     }
 
     this.setState({
@@ -121,6 +143,10 @@ class Clients extends Component {
       pageLimit: pageIndex,
       isPageReset: false,
     });
+  };
+
+  updateCurrentPageDisplay = (clientsToDisplay, itemsPerPage, pageIndex) => {
+    return clientsToDisplay.slice(pageIndex - itemsPerPage, pageIndex);
   };
 
   updateClientsDisplay = () => {
@@ -140,7 +166,7 @@ class Clients extends Component {
 
     // const searchResults = this.searchBySearchInput(searchInput.toLowerCase());
 
-    console.log("this.state.currentFilters: ", currentFilters);
+    // console.log("this.state.currentFilters: ", currentFilters);
 
     if (Object.entries(currentFilters).length === 0) {
       return this.setState({
@@ -150,7 +176,7 @@ class Clients extends Component {
       });
     } else {
       filtered = this.filterByProperty();
-      console.log("filtered: ", filtered);
+      // console.log("filtered: ", filtered);
     }
 
     /*       if (!filterValue && !currentFilter && Object.entries(currentFilters).length === 0) {
@@ -247,10 +273,13 @@ class Clients extends Component {
       pageCount,
       currentClients,
       isPageReset,
+      showPopup,
+      clientToEdit,
     } = this.state;
 
-    console.log("clientsToDisplay: ", clientsToDisplay);
-    console.log("pageCount: ", pageCount);
+    console.log("currentClients: ", currentClients);
+    // console.log("pageCount: ", pageCount);
+    console.log("clientToEdit: ", clientToEdit);
 
     if (loading) {
       return <Loader type="Puff" color="#00BFFF" height={150} width={150} />;
@@ -268,7 +297,7 @@ class Clients extends Component {
             searchInput={searchInput}
           /> */}
         </div>
-        <div className="clients-child" style={{ margin: "5px 0" }}>
+        <div className="clients-child">
           <ClientsPagination
             updateDisplayByPage={this.updateDisplayByPage}
             pageLimit={pageLimit}
@@ -282,40 +311,26 @@ class Clients extends Component {
           />
         </div>
         <div className="clients-child">
-          <ColumnsHeader />
-        </div>
-        <div className="clients-child">
-          <RowContainer
-            submitInputChange={this.submitInputChange}
-            clients={currentClients}
-          />
+          <table>
+            <ColumnsHeader />
+            <ClientRow
+              submitInputChange={this.submitInputChange}
+              clients={currentClients}
+              toggleEditClient={this.toggleEditClient}
+            />
+          </table>
+          {showPopup && (
+            <EditClientPopUp
+              clientToEdit={clientToEdit}
+              toggleEditClient={this.toggleEditClient}
+              submitInputChange={this.submitInputChange}
+            />
+          )}
         </div>
       </div>
     );
   }
 }
-
-const RowContainer = ({ clients, submitInputChange }) => {
-  return (
-    <div>
-      {clients.map((c) => {
-        return (
-          <ClientData
-            id={c._id}
-            key={c._id}
-            name={c.name}
-            country={c.country}
-            firstContact={c.firstContact}
-            emailType={c.emailType}
-            sold={c.sold}
-            owner={c.owner}
-            submitInputChange={submitInputChange}
-          />
-        );
-      })}
-    </div>
-  );
-};
 
 export default Clients;
 
