@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import Loader from "react-loader-spinner";
-import Badges from "./badges/Badges";
-import "../../styles/analytics/analytics.css";
-import call from "../../ApiCalls/ApiCalls";
-import utils from "../../utils/utils";
-import { clientsHeaders } from "../../utils/consts";
 import {
   faUsers,
   faEnvelope,
   faUserPlus,
   faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
+import call from "../../ApiCalls/ApiCalls";
+import utils from "../../utils/utils";
+import "../../styles/analytics/analytics.css";
+import Badges from "./badges/Badges";
 import TopEmployees from "./charts/TopEmployees";
+import SalesByMonth from "./charts/SalesByMonth";
+import ClientAcquisition from "./charts/ClientAcquisition";
 
 class Analytics extends Component {
   constructor() {
@@ -44,7 +45,7 @@ class Analytics extends Component {
         icon: faUsers,
         header: "Long-time Clients",
         description: "clients who joined before 2018",
-        result: clients.filter((c) => utils.isFromBefore2018(c.firstContact))
+        result: clients.filter((c) => utils.isFrom2018(c.firstContact, true))
           .length,
       },
       {
@@ -61,7 +62,7 @@ class Analytics extends Component {
         icon: faUserPlus,
         header: "Target Clients",
         description: "clients without acquisition",
-        result: utils.getSales(clients).length,
+        result: utils.getSales(clients, false).length,
       },
       {
         id: 4,
@@ -74,6 +75,13 @@ class Analytics extends Component {
         ),
       },
     ];
+  };
+
+  getSalesByYear = () => {
+    const { clients } = this.state;
+    return utils
+      .getSales(clients, true)
+      .filter((c) => utils.isFrom2018(c.firstContact, false));
   };
 
   render() {
@@ -90,11 +98,18 @@ class Analytics extends Component {
     return (
       <div id="analytics-container">
         <Badges badges={this.getBadges()} />
-        <TopEmployees
-          owners={utils.countSalesByKey(
-            utils.getSalesByProperty("owner", clients)
-          )}
-        />
+        <div className="charts-wrapper">
+          <TopEmployees
+            owners={utils.countSalesByKey(
+              utils.getSalesByProperty("owner", clients)
+            )}
+          />
+          <SalesByMonth sales={this.getSalesByYear()} />
+          <ClientAcquisition
+            sales={utils.getSales(clients, true)}
+            salesOf2018={this.getSalesByYear()}
+          />
+        </div>
       </div>
     );
   }

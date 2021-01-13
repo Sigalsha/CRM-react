@@ -26,16 +26,20 @@ class Utils {
     return false;
   };
 
-  isFromBefore2018 = (startYear) => {
+  isFrom2018 = (startYear, isBefore) => {
     let year = startYear.slice(0, 4);
-    return year < 2018;
+    if (isBefore) {
+      return year < 2018;
+    } else {
+      return year >= 2018;
+    }
   };
 
-  getSales = (clientsToFilter) =>
-    clientsToFilter.filter((c) => c.sold === false);
+  getSales = (clientsToFilter, isSold) =>
+    clientsToFilter.filter((c) => c.sold === isSold);
 
   getSalesByProperty = (key, clientsToFilter) => {
-    return this.getClientProperty(key, utils.getSales(clientsToFilter));
+    return this.getClientProperty(key, utils.getSales(clientsToFilter, true));
   };
 
   countSalesByKey = (sales) => {
@@ -54,6 +58,14 @@ class Utils {
     );
     console.log("mostFrequent: ", mostFrequent);
     return mostFrequent;
+  };
+
+  getSalesByMonth = (sales, month) => {
+    const fixedDates = sales.map((sale) => {
+      return new Date(sale.firstContact);
+    });
+    const filteredByMonth = fixedDates.filter((d) => d.getMonth() === month);
+    return filteredByMonth.length;
   };
 }
 
