@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/general/select.css";
 
-const Select = ({ placeholder, onChange, id, name, optionList, value }) => {
+const Select = ({ placeholder, onChange, name, optionList, value }) => {
   return (
     <select
       className="text-row"

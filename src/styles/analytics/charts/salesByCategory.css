@@ -1,0 +1,15 @@
+.sales-by-category-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  max-width: 50%;
+}
+
+.chart-header {
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 5px;
+  margin-left: 50px;
+}

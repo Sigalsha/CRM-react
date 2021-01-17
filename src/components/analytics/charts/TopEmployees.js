@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  BarChart,
   Bar,
   Text,
   XAxis,
@@ -8,17 +7,19 @@ import {
   Tooltip,
   Legend,
   LabelList,
+  BarChart,
+  CartesianGrid,
 } from "recharts";
 import "../../../styles/analytics/charts/topEmployees.css";
 
-const TopEmployees = ({ owners }) => {
-  function getOwners() {
+const TopEmployees = ({ owners, getOwners }) => {
+  /*   function getOwners() {
     const data = [];
     for (const [key, value] of Object.entries(owners)) {
       data.push({ name: key, sales: value });
     }
     return data;
-  }
+  } */
 
   return (
     <div className="top-employees-wrapper">
@@ -26,10 +27,11 @@ const TopEmployees = ({ owners }) => {
       <BarChart
         width={400}
         height={400}
-        data={getOwners()}
-        margin={{ top: 40, bottom: 5, right: 5, left: 5 }}
+        data={getOwners(owners)}
+        margin={{ top: 20, bottom: 5, right: 5, left: 5 }}
         fontSize={12}
       >
+        <CartesianGrid stroke="#f5f5f5" />
         <XAxis dataKey="name">
           <Text width={12} />
         </XAxis>
@@ -44,7 +46,12 @@ const TopEmployees = ({ owners }) => {
         <Tooltip />
         <Legend />
         <Bar dataKey="sales" fill="#F7CE3E" barSize={20}>
-          <LabelList dataKey="name" position="top" fontSize={12} />
+          <LabelList
+            dataKey="name"
+            position="top"
+            fontSize={12}
+            marginBottom={15}
+          />
         </Bar>
       </BarChart>
     </div>

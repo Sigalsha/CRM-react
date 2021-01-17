@@ -13,6 +13,7 @@ import Badges from "./badges/Badges";
 import TopEmployees from "./charts/TopEmployees";
 import SalesByMonth from "./charts/SalesByMonth";
 import ClientAcquisition from "./charts/ClientAcquisition";
+import SalesByCategory from "./charts/SalesByCategory";
 
 class Analytics extends Component {
   constructor() {
@@ -84,6 +85,22 @@ class Analytics extends Component {
       .filter((c) => utils.isFrom2018(c.firstContact, false));
   };
 
+  getSalesBySpecificYear = () => {
+    const { clients } = this.state;
+    return utils.getSales(clients, true).map((c) => c.firstContact.slice(0, 4));
+  };
+
+  getSalesByClientsCategory(clientsByCategory) {
+    const data = [];
+    for (const [key, value] of Object.entries(clientsByCategory)) {
+      data.push({
+        name: key,
+        sales: value,
+      });
+    }
+    return data;
+  }
+
   render() {
     const { loading, clients } = this.state;
 
@@ -103,8 +120,23 @@ class Analytics extends Component {
             owners={utils.countSalesByKey(
               utils.getSalesByProperty("owner", clients)
             )}
+            getOwners={this.getSalesByClientsCategory}
           />
           <SalesByMonth sales={this.getSalesByYear()} />
+          <SalesByCategory /* sales={utils.getSales(clients, true)} */
+            clients={clients}
+            owners={utils.countSalesByKey(
+              utils.getSalesByProperty("owner", clients)
+            )}
+            getSalesByCategory={this.getSalesByClientsCategory}
+            countries={utils.countSalesByKey(
+              utils.getSalesByProperty("country", clients)
+            )}
+            emailTypes={utils.countSalesByKey(
+              utils.getSalesByProperty("emailType", clients)
+            )}
+            years={utils.countSalesByKey(this.getSalesBySpecificYear())}
+          />
           <ClientAcquisition
             sales={utils.getSales(clients, true)}
             salesOf2018={this.getSalesByYear()}

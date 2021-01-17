@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../../styles/actions/addClient.css";
 
 class AddClient extends Component {

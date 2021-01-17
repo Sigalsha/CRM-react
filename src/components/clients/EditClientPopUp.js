@@ -24,7 +24,7 @@ class EditClientPopUp extends Component {
 
   handleSubmit = () => {
     let newObject = {};
-    const { submitInputChange, toggleEditClient } = this.props;
+    const { submitInputChange } = this.props;
     let { id, firstName, sureName, country } = this.state;
     newObject.id = id;
     newObject.name = firstName + " " + sureName;

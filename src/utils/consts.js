@@ -26,3 +26,10 @@ export const months = [
   "November",
   "December",
 ];
+
+export const salesByCategory = {
+  country: "Country",
+  emailType: "EmailType",
+  year: "Year",
+  owner: "Owner",
+};

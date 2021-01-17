@@ -35,6 +35,10 @@ class Utils {
     }
   };
 
+  filterSalesByYear = (firstContactDate, year) => {
+    return firstContactDate.slice(0, 4) === year;
+  };
+
   getSales = (clientsToFilter, isSold) =>
     clientsToFilter.filter((c) => c.sold === isSold);
 

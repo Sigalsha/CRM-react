@@ -53,6 +53,7 @@ class ClientsFilter extends Component {
           value={name}
           onChange={this.handleChange}
           name="name"
+          isFilterSelect
         />
         <Filter
           labelName="Country"

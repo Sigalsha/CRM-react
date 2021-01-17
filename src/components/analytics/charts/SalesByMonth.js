@@ -16,9 +16,9 @@ import "../../../styles/analytics/charts/salesByMonth.css";
 const SalesByMonth = ({ sales }) => {
   function getSalesByMonth() {
     const data = [];
-    let salesCount = 0;
+    // let salesCount = 0;
     for (let i = 0; i < 12; i++) {
-      salesCount += utils.getSalesByMonth(sales, i);
+      // salesCount += utils.getSalesByMonth(sales, i);
       data.push({
         name: months[i],
         sales: utils.getSalesByMonth(sales, i),
@@ -54,8 +54,9 @@ const SalesByMonth = ({ sales }) => {
         <Line
           type="monotone"
           dataKey="sales"
-          stroke="#F7CE3E"
+          stroke="#ff884b"
           strokeWidth={2}
+          dot={{ fill: "lightgray" }}
         />
       </LineChart>
     </div>
