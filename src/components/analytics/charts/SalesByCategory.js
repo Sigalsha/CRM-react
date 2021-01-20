@@ -8,30 +8,21 @@ import {
   Tooltip,
   Text,
 } from "recharts";
-import Select from "../../general/Select";
-import utils from "../../../utils/utils";
-import { clientsHeaders } from "../../../utils/consts";
+import { SALES_BY_CATEGORY, COLORS } from "../../../utils/consts";
+import "../../../styles/analytics/analytics.css";
 import "../../../styles/analytics/charts/salesByCategory.css";
-import { salesByCategory } from "../../../utils/consts";
-
-const data = [{ name: "Romania", sales: 10 }];
 
 class SalesByCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sales: [],
       category: "country",
     };
   }
   handleCategoryChange = (e) => {
     const { value } = e.target;
-    const { category } = this.state;
-
     this.setState({ category: value });
   };
-
-  handleEmailType = () => {};
 
   generateCategoryData = () => {
     const { category } = this.state;
@@ -61,15 +52,15 @@ class SalesByCategory extends Component {
     const { category } = this.state;
     switch (category) {
       case "country":
-        return "#795548";
+        return COLORS["brown"];
       case "owner":
-        return "#F7CE3E";
+        return COLORS["yellow"];
       case "emailType":
-        return "#ff884b";
+        return COLORS["orange"];
       case "year":
-        return "lightgray";
+        return COLORS["lightgray"];
       default:
-        return "lightgray";
+        return COLORS["lightgray"];
     }
   };
 
@@ -84,24 +75,29 @@ class SalesByCategory extends Component {
 
   render() {
     const { category } = this.state;
-    // console.log("years: ", this.props.years);
 
     return (
-      <div className="sales-by-category-wrapper">
-        <h5 className="chart-header">Sales by</h5>
-        <select value={category} onChange={this.handleCategoryChange}>
-          {Object.keys(salesByCategory).map((c, i) => {
-            return (
-              <option value={c} key={i} name={c}>
-                {salesByCategory[c]}
-              </option>
-            );
-          })}
-        </select>
+      <div className="chart-wrapper">
+        <div className="category-header">
+          <h5 className="chart-header">Sales by</h5>
+          <select
+            className="select-category"
+            value={category}
+            onChange={this.handleCategoryChange}
+          >
+            {Object.keys(SALES_BY_CATEGORY).map((c, i) => {
+              return (
+                <option value={c} key={i} name={c}>
+                  {SALES_BY_CATEGORY[c]}
+                </option>
+              );
+            })}
+          </select>
+        </div>
 
         <AreaChart
           width={400}
-          height={400}
+          height={300}
           data={this.generateCategoryData()}
           margin={{ top: 20, bottom: 5, right: 5, left: 5 }}
           fontSize={12}
@@ -109,7 +105,7 @@ class SalesByCategory extends Component {
           <CartesianGrid
             strokeDasharray="3 3"
             strokeWidth={2}
-            dot={{ fill: "lightgray" }}
+            dot={{ fill: COLORS["lightgray"] }}
           />
           <XAxis dataKey="name">
             <Text width={12} />

@@ -10,28 +10,22 @@ import {
   BarChart,
   CartesianGrid,
 } from "recharts";
+import { COLORS } from "../../../utils/consts";
+import "../../../styles/analytics/analytics.css";
 import "../../../styles/analytics/charts/topEmployees.css";
 
 const TopEmployees = ({ owners, getOwners }) => {
-  /*   function getOwners() {
-    const data = [];
-    for (const [key, value] of Object.entries(owners)) {
-      data.push({ name: key, sales: value });
-    }
-    return data;
-  } */
-
   return (
-    <div className="top-employees-wrapper">
+    <div className="chart-wrapper">
       <h5 className="chart-header">Top Employees</h5>
       <BarChart
         width={400}
-        height={400}
+        height={300}
         data={getOwners(owners)}
         margin={{ top: 20, bottom: 5, right: 5, left: 5 }}
         fontSize={12}
       >
-        <CartesianGrid stroke="#f5f5f5" />
+        <CartesianGrid stroke={COLORS["backgroundGray"]} />
         <XAxis dataKey="name">
           <Text width={12} />
         </XAxis>
@@ -45,7 +39,7 @@ const TopEmployees = ({ owners, getOwners }) => {
         />
         <Tooltip />
         <Legend />
-        <Bar dataKey="sales" fill="#F7CE3E" barSize={20}>
+        <Bar dataKey="sales" fill={COLORS["yellow"]} barSize={20}>
           <LabelList
             dataKey="name"
             position="top"

@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
+import { COLORS } from "../../utils/consts";
 import "../../styles/analytics/analytics.css";
 import Badges from "./badges/Badges";
 import TopEmployees from "./charts/TopEmployees";
@@ -78,14 +79,14 @@ class Analytics extends Component {
     ];
   };
 
-  getSalesByYear = () => {
+  getSalesOf2018 = () => {
     const { clients } = this.state;
     return utils
       .getSales(clients, true)
       .filter((c) => utils.isFrom2018(c.firstContact, false));
   };
 
-  getSalesBySpecificYear = () => {
+  getSalesByYear = () => {
     const { clients } = this.state;
     return utils.getSales(clients, true).map((c) => c.firstContact.slice(0, 4));
   };
@@ -107,7 +108,7 @@ class Analytics extends Component {
     if (loading) {
       return (
         <div className="loader-position">
-          <Loader type="Puff" color="#00BFFF" height={150} width={150} />
+          <Loader type="Puff" color={COLORS["cyan"]} height={150} width={150} />
         </div>
       );
     }
@@ -115,15 +116,15 @@ class Analytics extends Component {
     return (
       <div id="analytics-container">
         <Badges badges={this.getBadges()} />
-        <div className="charts-wrapper">
+        <div className="charts-container">
           <TopEmployees
             owners={utils.countSalesByKey(
               utils.getSalesByProperty("owner", clients)
             )}
             getOwners={this.getSalesByClientsCategory}
           />
-          <SalesByMonth sales={this.getSalesByYear()} />
-          <SalesByCategory /* sales={utils.getSales(clients, true)} */
+          <SalesByMonth sales={this.getSalesOf2018()} />
+          <SalesByCategory
             clients={clients}
             owners={utils.countSalesByKey(
               utils.getSalesByProperty("owner", clients)
@@ -135,11 +136,13 @@ class Analytics extends Component {
             emailTypes={utils.countSalesByKey(
               utils.getSalesByProperty("emailType", clients)
             )}
-            years={utils.countSalesByKey(this.getSalesBySpecificYear())}
+            years={utils.countSalesByKey(this.getSalesByYear())}
           />
           <ClientAcquisition
             sales={utils.getSales(clients, true)}
-            salesOf2018={this.getSalesByYear()}
+            salesOf2018={this.getSalesOf2018()}
+            years={utils.countSalesByKey(this.getSalesByYear())}
+            getSalesByCategory={this.getSalesByClientsCategory}
           />
         </div>
       </div>

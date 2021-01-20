@@ -1,35 +1,82 @@
 .badges-wrapper {
-  /* width: 50%; */
   height: 100%;
-  /*  min-height: 400px; */
   display: flex;
   justify-content: space-evenly;
   flex-flow: row wrap;
-  /*  margin: 20px; */
   padding: 10px;
+  margin: 10px;
 }
 
 .badge {
-  background-color: #777;
-  border-radius: 10px;
-  padding: 3px 7px;
+  /* display: flex;
+  flex-flow: column wrap;
+  padding: 3px 7px; */
   text-align: center;
   vertical-align: middle;
   margin-top: 10px;
-  width: 22%;
-  height: 150px;
-  /* margin: 5px auto auto auto; */
+  width: 20%;
+  height: 200px;
+  border: 1px solid transparent;
+  border-radius: 15%;
+}
+
+.badge:nth-child(odd) {
+  background-color: rgba(255, 136, 75, 0.85);
+}
+
+.badge:nth-child(even) {
+  background-color: rgba(247, 206, 62, 0.85);
 }
 
 .badge-icon {
-  font-size: 40px;
+  font-size: 50px;
+  margin-top: 20px;
 }
 
 .badge-header {
-  font-size: 2em;
+  font-size: 14px;
+  margin: 20px 5px 10px 5px;
+  letter-spacing: 1.2;
+  font-weight: 550;
+  text-transform: uppercase;
+  white-space: normal;
+  line-height: 1.5;
 }
 
 .badge-desc {
-  font-size: 14px;
+  font-size: 11px;
   text-align: center;
+  margin: 5px 10px;
+  font-weight: 400;
+  white-space: normal;
+  line-height: 1.5;
+  height: 30px;
+}
+
+.badge-result {
+  line-height: 1.5;
+  font-size: 24px;
+  font-weight: 550;
+}
+
+@media screen and (min-width: 1023px) {
+  .badge-icon {
+    margin-top: 15px;
+  }
+
+  .badge-header {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  .badge-desc {
+    font-size: 12px;
+    height: 25px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+}
+
+@media screen and (max-width: 400px) {
 }

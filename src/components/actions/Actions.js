@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import "../../styles/actions/actions.css";
 import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
-import { clientsHeaders } from "../../utils/consts";
+import { clientsHeaders, COLORS } from "../../utils/consts";
 
 class Actions extends Component {
   constructor() {
@@ -135,7 +135,7 @@ class Actions extends Component {
     if (loading) {
       return (
         <div className="loader-position">
-          <Loader type="Puff" color="#00BFFF" height={150} width={150} />
+          <Loader type="Puff" color={COLORS["cyan"]} height={150} width={150} />
         </div>
       );
     }

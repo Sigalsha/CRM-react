@@ -1,15 +1,15 @@
-.sales-by-category-wrapper {
+.category-header {
   display: flex;
-  justify-content: center;
+  flex-flow: row wrap;
   align-items: center;
-  flex-flow: column wrap;
-  max-width: 50%;
 }
 
-.chart-header {
-  text-transform: uppercase;
-  font-weight: bold;
+.select-category {
+  margin-left: 40px;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
   text-align: center;
-  padding-top: 5px;
-  margin-left: 50px;
+  background-color: transparent;
+  width: 150px;
 }

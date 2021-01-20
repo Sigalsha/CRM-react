@@ -16,9 +16,9 @@ const Badges = ({ badges }) => {
             description={badge.description}
           >
             <FontAwesomeIcon icon={badge.icon} className="badge-icon" />
-            <div className="badge-header">{badge.header}</div>
+            <p className="badge-header">{badge.header}</p>
             <p className="badge-desc">{badge.description}</p>
-            <h2>{badge.result}</h2>
+            <h2 className="badge-result">{badge.result}</h2>
           </div>
         );
       })}

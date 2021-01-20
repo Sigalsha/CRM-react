@@ -1,53 +1,50 @@
 #updateClientContainer {
-    height: 100%;
-    width: 63%;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    text-align: left;
-    font-size: 0.9em;
-    margin-left: 2%;
-    padding: 1%;
+  height: 100%;
+  width: 63%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  text-align: left;
+  font-size: 0.9em;
+  margin-left: 2%;
+  padding: 1%;
 }
 
-
-.updateHeader{
-    width: 30%;
-    margin-top: 1%;
+.updateHeader {
+  width: 30%;
+  margin-top: 1%;
 }
 
-.select{
-    width: 30%;
-    border-color: lightgray;
-    text-align: center;
-    margin-left: 2%;
-    padding-bottom: 2%;
-
+.select {
+  width: 30%;
+  border-color: lightgray;
+  text-align: center;
+  margin-left: 2%;
+  padding-bottom: 2%;
 }
 
 .inputText {
-    width: 80%;
-    text-align: center;
-    background-color: transparent;
-    border-style: solid; 
-    border-width: 0px 0px 1px 0px;  
-    border-color: lightgray;
+  width: 80%;
+  text-align: center;
+  background-color: transparent;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: lightgray;
 }
 
-
-.lightBtn{
-    width: 30%;
-    margin-left: 5%;
-    margin-top: 1%;
-    text-transform: uppercase;
-    color: #F7CE3E;
-    font-weight: bold;
+.lightBtn {
+  width: 30%;
+  margin-left: 5%;
+  margin-top: 1%;
+  text-transform: uppercase;
+  color: #f7ce3e;
+  font-weight: bold;
 }
 
 .lightBtn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .emptyDiv {
-    width: 32%;
+  width: 32%;
 }

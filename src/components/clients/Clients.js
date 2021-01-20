@@ -8,6 +8,7 @@ import call from "../../ApiCalls/ApiCalls";
 import ClientsFilter from "./ClientsFilter";
 import ClientsPagination from "./ClientsPagination";
 import utils from "../../utils/utils";
+import { COLORS } from "../../utils/consts";
 import ClientRow from "./ClientRow.js";
 import EditClientPopUp from "./EditClientPopUp";
 
@@ -282,7 +283,9 @@ class Clients extends Component {
     console.log("clientToEdit: ", clientToEdit);
 
     if (loading) {
-      return <Loader type="Puff" color="#00BFFF" height={150} width={150} />;
+      return (
+        <Loader type="Puff" color={COLORS["cyan"]} height={150} width={150} />
+      );
     }
     return (
       <div id="clients-container">

@@ -7,6 +7,7 @@ import Landing from "./components/general/Landing.js";
 import Clients from "./components/clients/Clients.js";
 import Actions from "./components/actions/Actions.js";
 import Analytics from "./components/analytics/Analytics";
+import { COLORS } from "./utils/consts";
 // import ClientInput from './components/actions/clientInput.js'
 // import AddClient from './components/actions/addClient.js'
 // import Update from './components/actions/update.js'
@@ -68,7 +69,9 @@ class App extends Component {
     const { loading } = this.state;
 
     if (loading) {
-      return <Loader type="Puff" color="#00BFFF" height={150} width={150} />;
+      return (
+        <Loader type="Puff" color={COLORS["cyan"]} height={150} width={150} />
+      );
     }
 
     return (

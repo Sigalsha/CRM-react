@@ -27,9 +27,18 @@ export const months = [
   "December",
 ];
 
-export const salesByCategory = {
+export const SALES_BY_CATEGORY = {
   country: "Country",
   emailType: "EmailType",
   year: "Year",
   owner: "Owner",
+};
+
+export const COLORS = {
+  brown: "#795548",
+  yellow: "#f7ce3e",
+  orange: "#ff884b",
+  lightgray: "lightgray",
+  backgroundGray: "#f5f5f5",
+  cyan: "#00bfff",
 };

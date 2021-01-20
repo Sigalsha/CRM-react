@@ -10,15 +10,14 @@ import {
   Text,
 } from "recharts";
 import utils from "../../../utils/utils";
-import { months } from "../../../utils/consts";
+import { COLORS, months } from "../../../utils/consts";
+import "../../../styles/analytics/analytics.css";
 import "../../../styles/analytics/charts/salesByMonth.css";
 
 const SalesByMonth = ({ sales }) => {
   function getSalesByMonth() {
     const data = [];
-    // let salesCount = 0;
     for (let i = 0; i < 12; i++) {
-      // salesCount += utils.getSalesByMonth(sales, i);
       data.push({
         name: months[i],
         sales: utils.getSalesByMonth(sales, i),
@@ -28,11 +27,11 @@ const SalesByMonth = ({ sales }) => {
   }
 
   return (
-    <div className="sales-by-month-wrapper">
+    <div className="chart-wrapper">
       <h5 className="chart-header">2018's Sales by Month</h5>
       <LineChart
         width={400}
-        height={400}
+        height={300}
         data={getSalesByMonth()}
         margin={{ top: 20, bottom: 5, right: 5, left: 5 }}
         fontSize={12}
@@ -54,9 +53,9 @@ const SalesByMonth = ({ sales }) => {
         <Line
           type="monotone"
           dataKey="sales"
-          stroke="#ff884b"
+          stroke={COLORS["orange"]}
           strokeWidth={2}
-          dot={{ fill: "lightgray" }}
+          dot={{ fill: COLORS["lightgray"] }}
         />
       </LineChart>
     </div>
