@@ -94,7 +94,6 @@ class SalesByCategory extends Component {
             })}
           </select>
         </div>
-
         <AreaChart
           width={400}
           height={300}
@@ -110,14 +109,7 @@ class SalesByCategory extends Component {
           <XAxis dataKey="name">
             <Text width={12} />
           </XAxis>
-          <YAxis
-            label={{
-              value: "num of sales",
-              angle: -90,
-              position: "insideLeft",
-              fontSize: 12,
-            }}
-          />
+          <YAxis />
           <Tooltip />
           <Area
             type="monotone"

@@ -38,6 +38,10 @@
 
 @media screen and (max-width: 400px) {
   .column-header {
-    font-size: 10px;
+    font-size: 9px;
+  }
+
+  .column-header:nth-child(n + 2) {
+    padding-left: 0;
   }
 }

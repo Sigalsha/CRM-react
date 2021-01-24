@@ -12,7 +12,6 @@ import {
 } from "recharts";
 import { COLORS } from "../../../utils/consts";
 import "../../../styles/analytics/analytics.css";
-import "../../../styles/analytics/charts/topEmployees.css";
 
 const TopEmployees = ({ owners, getOwners }) => {
   return (
@@ -29,14 +28,7 @@ const TopEmployees = ({ owners, getOwners }) => {
         <XAxis dataKey="name">
           <Text width={12} />
         </XAxis>
-        <YAxis
-          label={{
-            value: "num of sales",
-            angle: -90,
-            position: "insideLeft",
-            fontSize: 12,
-          }}
-        />
+        <YAxis />
         <Tooltip />
         <Legend />
         <Bar dataKey="sales" fill={COLORS["yellow"]} barSize={20}>

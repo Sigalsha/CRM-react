@@ -1,7 +1,7 @@
 .clients-pagination-wrapper {
   display: flex;
   justify-content: space-evenly;
-  margin: 5px 0;
+  margin: 20px 0;
   flex-wrap: wrap;
 }
 
@@ -32,8 +32,9 @@
 }
 
 .current-page-number {
-  color: blue;
+  color: #795548;
   cursor: not-allowed;
+  font-weight: bold;
 }
 
 .not-current-page {
@@ -50,18 +51,22 @@
   .page-numbers {
     font-size: 12px;
   }
-
-  /*   .page-number:nth-child(n + 11) {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
-  } */
 }
 
 @media screen and (max-width: 400px) {
+  .clients-pagination-wrapper {
+    font-size: 12px;
+    margin: 5px 10px;
+    justify-content: space-between;
+  }
+
+  .page-number {
+    padding-right: 0;
+  }
+
   .current-page-number {
     color: inherit;
+    font-weight: normal;
   }
   .not-current-page {
     display: none;

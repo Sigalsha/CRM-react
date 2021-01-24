@@ -10,7 +10,7 @@ import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
 import { COLORS } from "../../utils/consts";
 import "../../styles/analytics/analytics.css";
-import Badges from "./badges/Badges";
+import Badges from "./Badges";
 import TopEmployees from "./charts/TopEmployees";
 import SalesByMonth from "./charts/SalesByMonth";
 import ClientAcquisition from "./charts/ClientAcquisition";
@@ -30,10 +30,6 @@ class Analytics extends Component {
       this.setState({
         loading: false,
         clients: data,
-        /*         owners: utils.reduceDuplications(
-          utils.getClientProperty(clientsHeaders["owner"], data)
-        ),
-        currentClient: "", */
       });
     }, 1000);
   }
@@ -46,7 +42,7 @@ class Analytics extends Component {
         name: "longTimeClients",
         icon: faUsers,
         header: "Long-time Clients",
-        description: "clients who joined before 2018",
+        description: "Clients who joined before 2018",
         result: clients.filter((c) => utils.isFrom2018(c.firstContact, true))
           .length,
       },
@@ -55,7 +51,7 @@ class Analytics extends Component {
         name: "emailsSent",
         icon: faEnvelope,
         header: "Emails Sent",
-        description: "",
+        description: "Number of emails sent in total",
         result: clients.filter((c) => c.emailType !== null).length,
       },
       {
@@ -63,7 +59,7 @@ class Analytics extends Component {
         name: "targetClients",
         icon: faUserPlus,
         header: "Target Clients",
-        description: "clients without acquisition",
+        description: "Clients without acquisition",
         result: utils.getSales(clients, false).length,
       },
       {
@@ -71,7 +67,7 @@ class Analytics extends Component {
         name: "hottestCountry",
         icon: faGlobeAmericas,
         header: "Hottest Country",
-        description: "",
+        description: "Country with highest sales",
         result: utils.getTopSalesByKey(
           utils.getSalesByProperty("country", clients)
         ),

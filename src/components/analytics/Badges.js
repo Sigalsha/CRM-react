@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../../styles/analytics/badges.css";
+import "../../styles/analytics/badges.css";
 
 const Badges = ({ badges }) => {
   return (
@@ -16,7 +16,10 @@ const Badges = ({ badges }) => {
             description={badge.description}
           >
             <FontAwesomeIcon icon={badge.icon} className="badge-icon" />
-            <p className="badge-header">{badge.header}</p>
+            <p className="badge-header tooltip-hover">
+              {badge.header}
+              <span className="badge-tooltip">{badge.description}</span>
+            </p>
             <p className="badge-desc">{badge.description}</p>
             <h2 className="badge-result">{badge.result}</h2>
           </div>

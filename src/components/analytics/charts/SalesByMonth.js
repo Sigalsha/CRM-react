@@ -12,7 +12,6 @@ import {
 import utils from "../../../utils/utils";
 import { COLORS, months } from "../../../utils/consts";
 import "../../../styles/analytics/analytics.css";
-import "../../../styles/analytics/charts/salesByMonth.css";
 
 const SalesByMonth = ({ sales }) => {
   function getSalesByMonth() {
@@ -40,14 +39,7 @@ const SalesByMonth = ({ sales }) => {
         <XAxis dataKey="name">
           <Text width={12} />
         </XAxis>
-        <YAxis
-          label={{
-            value: "num of sales",
-            angle: -90,
-            position: "insideLeft",
-            fontSize: 12,
-          }}
-        />
+        <YAxis />
         <Tooltip />
         <Legend />
         <Line

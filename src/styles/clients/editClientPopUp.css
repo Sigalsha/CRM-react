@@ -83,3 +83,18 @@
 .update-btn:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+  .popup-wrapper {
+    font-size: 14px;
+  }
+
+  .popup-row span {
+    padding-right: 10px;
+  }
+
+  .update-btn {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+}

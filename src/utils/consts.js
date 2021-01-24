@@ -1,6 +1,6 @@
 export const clientsHeaders = {
   name: "name",
-  sureName: "name",
+  surname: "name",
   country: "country",
   firstContact: "firstContact",
   emailType: "emailType",
