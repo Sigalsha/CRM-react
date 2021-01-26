@@ -10,10 +10,10 @@ class ClientInput extends Component {
     const { clients } = this.props;
 
     return (
-      <div id="clientInputContainer">
-        <div className="UpdateHeader">Client:</div>
+      <div className="client-input-container">
+        <div className="update-header">Client:</div>
         <input
-          className="inputClientName"
+          className="input-client-name"
           type="text"
           list="clients"
           placeholder="Client Name"

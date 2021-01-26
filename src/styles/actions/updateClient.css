@@ -1,17 +1,16 @@
-#updateClientContainer {
-  height: 100%;
-  width: 63%;
+.update-client-container {
+  width: 70%;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   text-align: left;
   font-size: 0.9em;
-  margin-left: 2%;
+  margin: 1% 1% 1% 2%;
   padding: 1%;
 }
 
-.updateHeader {
-  width: 30%;
+.update-header {
+  width: 25%;
   margin-top: 1%;
 }
 
@@ -23,7 +22,7 @@
   padding-bottom: 2%;
 }
 
-.inputText {
+.input-text {
   width: 80%;
   text-align: center;
   background-color: transparent;
@@ -32,7 +31,7 @@
   border-color: lightgray;
 }
 
-.lightBtn {
+.light-btn {
   width: 30%;
   margin-left: 5%;
   margin-top: 1%;
@@ -41,10 +40,49 @@
   font-weight: bold;
 }
 
-.lightBtn:hover {
+.light-btn:hover {
   cursor: pointer;
 }
 
-.emptyDiv {
+.empty-div {
   width: 32%;
+}
+
+@media screen and (min-width: 1023px) {
+  .update-client-container {
+    margin: 0.5% 1% 0.5% 2%;
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .update-client-container {
+    width: 90%;
+  }
+
+  .update-header {
+    width: 30%;
+  }
+
+  .select {
+    width: 35%;
+  }
+
+  .light-btn {
+    width: 25%;
+  }
+
+  .empty-div {
+    width: 37%;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .update-client-container {
+    width: 95%;
+  }
+
+  /*   .light-btn {
+    font-size: 0.9em;
+  } */
 }

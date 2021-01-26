@@ -51,7 +51,7 @@ class UpdateClient extends Component {
     const { owners, emailType } = this.state;
 
     return (
-      <div id="updateClientContainer">
+      <div className="update-client-container">
         <UpdateHeader text={"Transfer ownership to:"} />
         <Select
           list={owners}
@@ -73,7 +73,7 @@ class UpdateClient extends Component {
         <UpdateButton onClick={this.changeEmailType} text={"send"} />
 
         <UpdateHeader text={"Declare sale!"} />
-        <div className="emptyDiv" />
+        <div className="empty-div" />
         <UpdateButton
           onClick={this.declareSold}
           text={"declare"}
@@ -85,14 +85,14 @@ class UpdateClient extends Component {
 }
 
 const UpdateHeader = ({ text }) => {
-  return <div className="updateHeader">{text}</div>;
+  return <div className="update-header">{text}</div>;
 };
 
 const Select = ({ list, placeholder, onChange, id, mapList }) => {
   return (
     <div className="select">
       <input
-        className="inputText"
+        className="input-text"
         type="text"
         list={list}
         placeholder={placeholder}
@@ -109,7 +109,7 @@ const Select = ({ list, placeholder, onChange, id, mapList }) => {
 
 const UpdateButton = ({ onClick, text }) => {
   return (
-    <div className="lightBtn" onClick={onClick}>
+    <div className="light-btn" onClick={onClick}>
       {text}
     </div>
   );

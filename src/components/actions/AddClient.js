@@ -53,7 +53,7 @@ class AddClient extends Component {
   render() {
     let { firstName, sureName, country, owner } = this.state;
     return (
-      <div id="addClient-container">
+      <div className="add-client-container">
         <InputHeader text={"First Name:"} />
         <Input
           name={"firstName"}
@@ -84,13 +84,13 @@ class AddClient extends Component {
 }
 
 const InputHeader = ({ text }) => {
-  return <div className="inputHeader">{text}</div>;
+  return <div className="input-header">{text}</div>;
 };
 
 const Input = ({ name, value, onChange }) => {
   return (
     <input
-      className="input-addClient"
+      className="input-add-client"
       type="text"
       name={name}
       value={value}
@@ -101,7 +101,7 @@ const Input = ({ name, value, onChange }) => {
 
 const AddNewClientBtn = ({ onClick, text }) => {
   return (
-    <div id="addNewClientBtn" onClick={onClick}>
+    <div className="add-new-client-btn" onClick={onClick}>
       {text}
     </div>
   );
