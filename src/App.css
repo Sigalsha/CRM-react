@@ -7,3 +7,29 @@
   height: 100vh;
   background-color: #ecf0f1;
 }
+
+#general-loader {
+  margin-left: 40%;
+  margin-top: 20%;
+}
+
+@media screen and (min-width: 1023px) {
+  #general-loader {
+    margin-left: 25%;
+    margin-top: 60%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #general-loader {
+    margin-left: 30%;
+    margin-top: 30%;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  #general-loader {
+    margin-left: 20%;
+    margin-top: 70%;
+  }
+}

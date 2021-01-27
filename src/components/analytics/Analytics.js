@@ -103,8 +103,13 @@ class Analytics extends Component {
 
     if (loading) {
       return (
-        <div className="loader-position">
-          <Loader type="Puff" color={COLORS["cyan"]} height={150} width={150} />
+        <div id="loader-position">
+          <Loader
+            type="Puff"
+            color={COLORS["yellow"]}
+            height={200}
+            width={200}
+          />
         </div>
       );
     }

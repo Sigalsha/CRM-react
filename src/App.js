@@ -8,19 +8,6 @@ import Clients from "./components/clients/Clients.js";
 import Actions from "./components/actions/Actions.js";
 import Analytics from "./components/analytics/Analytics";
 import { COLORS } from "./utils/consts";
-// import ClientInput from './components/actions/clientInput.js'
-// import AddClient from './components/actions/addClient.js'
-// import Update from './components/actions/update.js'
-// import Badges from './components/analytics/badges/badges.js'
-// import Emails from './components/analytics/badges/emails.js'
-// import NewClients from './components/analytics/badges/newClients.js'
-// import OutstandingClients from './components/analytics/badges/outstandingClients.js'
-// import Charts from './components/analytics/charts/charts.js'
-// import ClientAcquisition from './components/analytics/charts/clientAcquisition.js'
-// import SalesByCountry from './components/analytics/charts/salesByCountry.js'
-// import SalesSinceDate from './components/analytics/charts/salesSinceDate.js'
-// import TopEmployees from './components/analytics/charts/topEmployees.js'
-
 class App extends Component {
   constructor() {
     super();
@@ -70,7 +57,14 @@ class App extends Component {
 
     if (loading) {
       return (
-        <Loader type="Puff" color={COLORS["cyan"]} height={150} width={150} />
+        <div id="general-loader">
+          <Loader
+            type="Puff"
+            color={COLORS["yellow"]}
+            height={200}
+            width={200}
+          />
+        </div>
       );
     }
 
