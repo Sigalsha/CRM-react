@@ -64,7 +64,7 @@ class App extends Component {
             <Navbar />
           </div>
           <div>
-            <Route path="/" exact component={Landing} />
+            <Route path="/" component={Landing} />
             <Route path="/clients" exact component={Clients} />
             <Route path="/actions" exact component={Actions} />
             <Route path="/analytics" exact component={Analytics} />
