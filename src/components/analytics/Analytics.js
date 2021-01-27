@@ -10,12 +10,11 @@ import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
 import { COLORS } from "../../utils/consts";
 import "../../styles/analytics/analytics.css";
-import Badges from "./Badges";
 import TopEmployees from "./charts/TopEmployees";
 import SalesByMonth from "./charts/SalesByMonth";
 import ClientAcquisition from "./charts/ClientAcquisition";
 import SalesByCategory from "./charts/SalesByCategory";
-
+import Badges from "./Badges";
 class Analytics extends Component {
   constructor() {
     super();
@@ -25,6 +24,7 @@ class Analytics extends Component {
   }
 
   componentDidMount() {
+    // TODO - get from server
     setTimeout(() => {
       let data = call.getClients();
       this.setState({

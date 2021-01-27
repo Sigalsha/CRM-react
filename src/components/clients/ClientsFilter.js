@@ -1,23 +1,21 @@
 import React, { Component } from "react";
-import { emailTypes, isSold } from "../../utils/consts";
-import Select from "../general/Select";
 import utils from "../../utils/utils";
-import { clientsHeaders } from "../../utils/consts";
+import { EMAIL_TYPES, IS_SOLD, CLIENTS_HEADERS } from "../../utils/consts";
 import "../../styles/clients/clientsFilter.css";
-
+import Select from "../general/Select";
 class ClientsFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       owners: utils.reduceDuplications(
-        utils.getClientProperty(clientsHeaders["owner"], this.props.clients)
+        utils.getClientProperty(CLIENTS_HEADERS["owner"], this.props.clients)
       ),
       names: utils.getClientProperty(
-        clientsHeaders["name"],
+        CLIENTS_HEADERS["name"],
         this.props.clients
       ),
       countries: utils.reduceDuplications(
-        utils.getClientProperty(clientsHeaders["country"], this.props.clients)
+        utils.getClientProperty(CLIENTS_HEADERS["country"], this.props.clients)
       ),
       owner: "",
       sold: "",
@@ -66,7 +64,7 @@ class ClientsFilter extends Component {
         <Filter
           labelName="Email Type"
           placeholder="Email Type"
-          optionList={emailTypes}
+          optionList={EMAIL_TYPES}
           onChange={this.handleChange}
           value={emailType}
           name="emailType"
@@ -74,7 +72,7 @@ class ClientsFilter extends Component {
         <Filter
           labelName="Sold"
           placeholder="Sold"
-          optionList={isSold}
+          optionList={IS_SOLD}
           onChange={this.handleChange}
           value={sold}
           name="sold"

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import Loader from "react-loader-spinner";
+import call from "../../ApiCalls/ApiCalls";
+import utils from "../../utils/utils";
+import { CLIENTS_HEADERS, COLORS } from "../../utils/consts";
+import "../../styles/actions/actions.css";
 import ClientInput from "./ClientInput";
 import UpdateClient from "./UpdateClient.js";
 import AddClient from "./AddClient.js";
-import Loader from "react-loader-spinner";
-import "../../styles/actions/actions.css";
-import call from "../../ApiCalls/ApiCalls";
-import utils from "../../utils/utils";
-import { clientsHeaders, COLORS } from "../../utils/consts";
-
 class Actions extends Component {
   constructor() {
     super();
@@ -38,7 +37,7 @@ class Actions extends Component {
         loading: false,
         clients: data,
         owners: utils.reduceDuplications(
-          utils.getClientProperty(clientsHeaders["owner"], data)
+          utils.getClientProperty(CLIENTS_HEADERS["owner"], data)
         ),
         currentClient: "",
       });
@@ -72,8 +71,7 @@ class Actions extends Component {
 
   updateClient = (newDetail) => {
     const { currentClient } = this.state;
-    console.log(newDetail);
-    let client = currentClient;
+    // let client = currentClient;
     // this.sendUpdatedClient(client, newDetail)
   };
 
@@ -89,15 +87,6 @@ class Actions extends Component {
   // this.setState({
   //     clients: clients
   // })
-
-  // TODO - remove, since imported from utils
-  findClientIndex = (clients, client) => {
-    for (let i in clients) {
-      if (clients[i].client === client) {
-        return i;
-      }
-    }
-  };
 
   addNewClient = (newClient) => {
     // post req.to the server, adding new client:
@@ -119,7 +108,6 @@ class Actions extends Component {
     //should get the client from the server with an Id, than update it in the state?
     //Or get all the clients including the new client
 
-    console.log(newClient);
     const clients = [...this.state.clients];
     clients.push(newClient);
     this.setState(

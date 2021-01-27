@@ -3,7 +3,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-.App {
+.app {
   height: 100vh;
   background-color: #ecf0f1;
 }
@@ -15,8 +15,8 @@
 
 @media screen and (min-width: 1023px) {
   #general-loader {
-    margin-left: 25%;
-    margin-top: 60%;
+    margin-left: 40%;
+    margin-top: 15%;
   }
 }
 

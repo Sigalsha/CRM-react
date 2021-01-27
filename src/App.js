@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import "./App.css";
+import { COLORS } from "./utils/consts";
 import Navbar from "./components/general/Navbar.js";
 import Landing from "./components/general/Landing.js";
 import Clients from "./components/clients/Clients.js";
 import Actions from "./components/actions/Actions.js";
 import Analytics from "./components/analytics/Analytics";
-import { COLORS } from "./utils/consts";
+import "./styles/app.css";
 class App extends Component {
   constructor() {
     super();
@@ -41,17 +41,6 @@ class App extends Component {
   //   }, 1000)
   // }
 
-  // extractFirstName = () => {
-  //   const costumers = [...this.state.costumers]
-  //   const costumersNames = costumers.filter(costumer => {
-  //     return costumer.name;
-  //   })
-  //   costumersNames.forEach(name => {
-  //     name.split(" ")
-  //   });
-  //   console.log(costumersNames)
-  // }
-
   render() {
     const { loading } = this.state;
 
@@ -70,7 +59,7 @@ class App extends Component {
 
     return (
       <Router>
-        <div className="App">
+        <div className="app">
           <div className="general">
             <Navbar />
           </div>

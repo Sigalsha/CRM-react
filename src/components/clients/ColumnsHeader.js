@@ -1,15 +1,24 @@
 import React from "react";
+import { CLIENTS_HEADERS } from "../../utils/consts";
 import "../../styles/clients/columnsHeader.css";
-import { clientsHeaders } from "../../utils/consts";
 
 const ColumnsHeader = () => {
+  function formatHeader(header) {
+    switch (header) {
+      case "firstContact":
+        return "First Contact";
+      case "emailType":
+        return "Email Type";
+      default:
+        return header;
+    }
+  }
   return (
     <thead>
       <tr id="columns-header-container">
-        {Object.keys(clientsHeaders).map((header, i) => (
-          // header[i] === header[i].toUpperCase() ? header[i].toLowerCase() + slice(header, header[i]) : header[i]
+        {Object.keys(CLIENTS_HEADERS).map((header, i) => (
           <th className="column-header" key={i}>
-            {header}
+            {formatHeader(header)}
           </th>
         ))}
       </tr>

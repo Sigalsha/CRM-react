@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
 import "../../styles/clients/clientData.css";
-// import ColumnsHeader from './columnsHeader.js'
-// import Popup from './PopUp.js'
-
 class ClientData extends Component {
   generateClientToEdit = () => {
     const { id, name, country, toggleEditClient } = this.props;
@@ -13,7 +9,6 @@ class ClientData extends Component {
       sureName: name.split(" ")[1],
       country,
     };
-    console.log("clientToEdit - clientData: ", clientToEdit);
     toggleEditClient(clientToEdit);
   };
 

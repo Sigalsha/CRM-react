@@ -18,7 +18,9 @@
 
 @media screen and (max-width: 700px) {
   #columns-header-container {
-    padding: 10px 5px;
+    padding: 5px 2px;
+    font-size: 9px;
+    margin: 0 -1px;
   }
 
   .column-header {
@@ -36,7 +38,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 415px) {
   .column-header {
     font-size: 9px;
   }

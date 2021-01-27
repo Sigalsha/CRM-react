@@ -3,7 +3,7 @@ import "../../styles/actions/clientInput.css";
 
 class ClientInput extends Component {
   handleChange = (event) => {
-    this.props.getCurrentClient(event); //event.target.value = client.name
+    this.props.getCurrentClient(event); // event.target.value = client.name
   };
 
   render() {

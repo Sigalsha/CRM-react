@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import Search from "./Search.js";
-import ColumnsHeader from "./ColumnsHeader.js";
-import ClientData from "./ClientData.js";
-import "../../styles/clients/clients.css";
 import Loader from "react-loader-spinner";
 import call from "../../ApiCalls/ApiCalls";
-import ClientsFilter from "./ClientsFilter";
-import ClientsPagination from "./ClientsPagination";
 import utils from "../../utils/utils";
 import { COLORS } from "../../utils/consts";
-import ClientRow from "./ClientRow.js";
+import "../../styles/clients/clients.css";
+import ColumnsHeader from "./ColumnsHeader";
+import ClientsFilter from "./ClientsFilter";
+import ClientsPagination from "./ClientsPagination";
+import ClientRow from "./ClientRow";
 import EditClientPopUp from "./EditClientPopUp";
 
 const itemsPerPage = 20;
@@ -21,7 +19,6 @@ class Clients extends Component {
       loading: true,
       showPopup: false,
       clientToEdit: {},
-      searchInput: "",
       clients: [],
       pageCount: 0,
       pageLimit: 20,
@@ -59,7 +56,6 @@ class Clients extends Component {
   }
 
   submitInputChange = (newObject) => {
-    // TODO - check why client isn't get updated after setState of updated clients !!!
     let { id, name, country } = newObject;
     const clients = [...this.state.currentClients];
     let index = utils.findClientIndexById(clients, id);
@@ -111,9 +107,7 @@ class Clients extends Component {
     let currentPageLimit = pageLimit;
     let pageIndex = pageNum * itemsPerPage;
 
-    /*
-      if specific page => 
-    */
+    // if specific page =>
     if (pageDirection === -1) {
       if (pageNum === 1) {
         currentPageDisplay = clientsToDisplay.slice(0, itemsPerPage);
@@ -151,23 +145,9 @@ class Clients extends Component {
   };
 
   updateClientsDisplay = () => {
-    const {
-      selectValue,
-      searchInput,
-      clients,
-      pageLimit,
-      currentFilters,
-      clientsToDisplay,
-    } = this.state;
+    const { clients, currentFilters } = this.state;
 
-    // let currentFilter = selectValue;
-    // let filterValue = searchInput.toLowerCase();
-    // let currentClients = clients && clients.slice(pageLimit - 20, pageLimit);
     let filtered = [];
-
-    // const searchResults = this.searchBySearchInput(searchInput.toLowerCase());
-
-    // console.log("this.state.currentFilters: ", currentFilters);
 
     if (Object.entries(currentFilters).length === 0) {
       return this.setState({
@@ -177,12 +157,7 @@ class Clients extends Component {
       });
     } else {
       filtered = this.filterByProperty();
-      // console.log("filtered: ", filtered);
     }
-
-    /*       if (!filterValue && !currentFilter && Object.entries(currentFilters).length === 0) {
-        return this.setState({ clientsToDisplay: currentClients });
-      } */
 
     this.setState({
       clientsToDisplay: filtered,
@@ -193,16 +168,10 @@ class Clients extends Component {
     });
   };
 
-  updateSearchInput = (e) =>
-    this.setState({ searchInput: e.target.value }, this.updateClientsDisplay);
-
   updateSelectedFilter = (e) => {
     const { currentFilters } = this.state;
     const { value, name } = e.target;
     let filters = {};
-    /*   if (localStorage.getItem("currentFilters") !== null) {
-      filters = JSON.parse(localStorage.getItem("currentFilters"));
-    } */
 
     if (name && value) {
       if (value === "All") {
@@ -218,29 +187,15 @@ class Clients extends Component {
       } else {
         filters[name] = value;
       }
-
-      // localStorage.setItem("currentFilters", JSON.stringify(filters));
     }
 
     this.setState(
-      /*      {
-        selectValue: name,
-        searchInput: value,
-        currentFilters: { ...currentFilters, ...filters },
-      }, */
       {
         currentFilters: { ...currentFilters, ...filters },
       },
       this.updateClientsDisplay
     );
   };
-
-  /*   searchBySearchInput = (searchInput) => {
-    const { clients } = this.state;
-    return clients.filter((client) =>
-      client[clientsHeaders["name"]].includes(searchInput)
-    );
-  }; */
 
   filterByProperty = () => {
     const { clients, currentFilters } = this.state;
@@ -270,17 +225,12 @@ class Clients extends Component {
       clients,
       pageLimit,
       selectValue,
-      clientsToDisplay,
       pageCount,
       currentClients,
       isPageReset,
       showPopup,
       clientToEdit,
     } = this.state;
-
-    console.log("currentClients: ", currentClients);
-    // console.log("pageCount: ", pageCount);
-    console.log("clientToEdit: ", clientToEdit);
 
     if (loading) {
       return (
@@ -302,10 +252,6 @@ class Clients extends Component {
             selectValue={selectValue}
             updateSelectedFilter={this.updateSelectedFilter}
           />
-          {/* <Search
-            updateSearchInput={this.updateSearchInput}
-            searchInput={searchInput}
-          /> */}
         </div>
         <div className="clients-child">
           <ClientsPagination
@@ -313,11 +259,7 @@ class Clients extends Component {
             pageLimit={pageLimit}
             pageCount={pageCount}
             isPageReset={isPageReset}
-            /*    pageCount={
-              pageCount > 0 ? pageCount : this.updatePageCount(clientsToDisplay)
-            } */ clients={
-              currentClients
-            }
+            clients={currentClients}
           />
         </div>
         <div className="clients-child">
@@ -343,18 +285,3 @@ class Clients extends Component {
 }
 
 export default Clients;
-
-/*   let itemsAmount = itemsPerPage * pageDirection;
-    let newDisplay = 0;
-    if (pageLimit + itemsAmount >= clientsToDisplay.length) {
-      newDisplay = clientsToDisplay.length;
-    } else if (pageLimit + itemsAmount <= 20) {
-      newDisplay = 20;
-    } else if (pageNum && pageNum !== 0) {
-      newDisplay = pageNum * 20;
-    } else {
-      newDisplay = pageLimit + itemsAmount;
-    }
-    console.log("newDisplay/ pageLimit: ", newDisplay);
-
-    this.setState({ pageLimit: newDisplay }, this.updateClientsDisplay) */

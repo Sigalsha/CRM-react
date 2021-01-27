@@ -1,4 +1,4 @@
-export const clientsHeaders = {
+export const CLIENTS_HEADERS = {
   name: "name",
   surname: "name",
   country: "country",
@@ -8,11 +8,11 @@ export const clientsHeaders = {
   owner: "owner",
 };
 
-export const emailTypes = ["A", "B", "C", "D", "No Type"];
+export const EMAIL_TYPES = ["A", "B", "C", "D", "No Type"];
 
-export const isSold = ["Sold", "Not sold"];
+export const IS_SOLD = ["Sold", "Not sold"];
 
-export const months = [
+export const MONTHS = [
   "January",
   "February",
   "March",

@@ -10,7 +10,7 @@ import {
   Text,
 } from "recharts";
 import utils from "../../../utils/utils";
-import { COLORS, months } from "../../../utils/consts";
+import { COLORS, MONTHS } from "../../../utils/consts";
 import "../../../styles/analytics/analytics.css";
 
 const SalesByMonth = ({ sales }) => {
@@ -18,7 +18,7 @@ const SalesByMonth = ({ sales }) => {
     const data = [];
     for (let i = 0; i < 12; i++) {
       data.push({
-        name: months[i],
+        name: MONTHS[i],
         sales: utils.getSalesByMonth(sales, i),
       });
     }
