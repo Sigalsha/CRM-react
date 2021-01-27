@@ -1,7 +1,7 @@
 {
   "main.css": "/CRM-react/static/css/main.6226f159.chunk.css",
-  "main.js": "/CRM-react/static/js/main.6b864973.chunk.js",
-  "main.js.map": "/CRM-react/static/js/main.6b864973.chunk.js.map",
+  "main.js": "/CRM-react/static/js/main.2ec123b9.chunk.js",
+  "main.js.map": "/CRM-react/static/js/main.2ec123b9.chunk.js.map",
   "static/css/1.ba06df3f.chunk.css": "/CRM-react/static/css/1.ba06df3f.chunk.css",
   "static/js/1.d1403ab5.chunk.js": "/CRM-react/static/js/1.d1403ab5.chunk.js",
   "static/js/1.d1403ab5.chunk.js.map": "/CRM-react/static/js/1.d1403ab5.chunk.js.map",
@@ -11,6 +11,6 @@
   "static/css/main.6226f159.chunk.css.map": "/CRM-react/static/css/main.6226f159.chunk.css.map",
   "static/css/1.ba06df3f.chunk.css.map": "/CRM-react/static/css/1.ba06df3f.chunk.css.map",
   "index.html": "/CRM-react/index.html",
-  "precache-manifest.2240c7130fad676e9da0270b683c22ab.js": "/CRM-react/precache-manifest.2240c7130fad676e9da0270b683c22ab.js",
+  "precache-manifest.8895ad527d30244e36c7a700c1d48b1f.js": "/CRM-react/precache-manifest.8895ad527d30244e36c7a700c1d48b1f.js",
   "service-worker.js": "/CRM-react/service-worker.js"
 }
