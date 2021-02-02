@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "2ec123b92cde3cd68285",
+    "revision": "6b86497318934dc82cca",
     "url": "/CRM-react/static/css/main.6226f159.chunk.css"
   },
   {
-    "revision": "2ec123b92cde3cd68285",
-    "url": "/CRM-react/static/js/main.2ec123b9.chunk.js"
+    "revision": "6b86497318934dc82cca",
+    "url": "/CRM-react/static/js/main.6b864973.chunk.js"
   },
   {
     "revision": "d1403ab5373a368401b9",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/CRM-react/static/media/businesswoman-2817567_1280.5683fffe.jpg"
   },
   {
-    "revision": "b6dbabb2077f6b5f0fc0a04bc6e9a925",
+    "revision": "6e61cfcae3921dbf220fa2a1fbcf3d71",
     "url": "/CRM-react/index.html"
   }
 ];
