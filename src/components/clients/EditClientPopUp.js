@@ -36,6 +36,9 @@ class EditClientPopUp extends Component {
   render() {
     const { id, firstName, sureName, country } = this.state;
     const { toggleEditClient } = this.props;
+
+    console.log("this.props.clientToEdit", this.props.clientToEdit);
+
     return (
       <div className="popup-wrapper">
         <div className="popup-container" id={id}>

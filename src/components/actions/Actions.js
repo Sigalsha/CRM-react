@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Loader from "react-loader-spinner";
+import axios from "axios";
 import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
 import { CLIENTS_HEADERS, COLORS } from "../../utils/consts";
@@ -18,20 +19,28 @@ class Actions extends Component {
     };
   }
 
-  // getClientsDetails = async ()  => {
-  //     return axios.get('http://localhost:8100/clients')
-  // }
-
-  // componentDidMount = async () => {
-  //     const response = await this.getClientsDetails()
-  //     console.log(response)
-  //     this.setState({
-  //         loading: false,
-  //         clients: response.data})
-  // }
-
   componentDidMount() {
-    setTimeout(() => {
+    axios
+      .get("http://localhost:8100/clients")
+      .then((res) => {
+        console.log("res from clients backend: ", res.data.data);
+        if (res.data.data.length) {
+          const { data } = res.data;
+          this.setState({
+            loading: false,
+            clients: data,
+            owners: utils.reduceDuplications(
+              utils.getClientProperty(CLIENTS_HEADERS["owner"], data)
+            ),
+            currentClient: "",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("err from clients backend: ", err);
+      });
+
+    /*  setTimeout(() => {
       let data = call.getClients();
       this.setState({
         loading: false,
@@ -41,12 +50,13 @@ class Actions extends Component {
         ),
         currentClient: "",
       });
-    }, 1000);
+    }, 1000); */
   }
 
   getCurrentClient = (event) => {
     let clientName = event.target.value;
     const clients = [...this.state.clients];
+
     let client = clients.filter((c) => clientName === c.name);
 
     if (client[0]) {

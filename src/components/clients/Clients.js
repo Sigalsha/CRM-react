@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Loader from "react-loader-spinner";
-import call from "../../ApiCalls/ApiCalls";
+import axios from "axios";
+// import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
 import { COLORS } from "../../utils/consts";
 import "../../styles/clients/clients.css";
@@ -29,22 +30,26 @@ class Clients extends Component {
     };
   }
 
-  // getClients = async ()  => {
-  //     return axios.get('http://localhost:8100/clients')
-  // }
-
-  // async componentDidMount() {
-  //     const response = await this.getClients()
-  //     console.log(response)
-  //     this.setState({
-  //         loading: false,
-  //         clients: response.data})
-  // }
-
   async componentDidMount() {
-    setTimeout(() => {
+    axios
+      .get("http://localhost:8100/clients")
+      .then((res) => {
+        console.log("res from clients backend: ", res.data.data);
+        if (res.data.data.length) {
+          const { data } = res.data;
+          this.setState(
+            { loading: false, clients: data },
+            this.updateClientsDisplay
+          );
+        }
+      })
+      .catch((err) => {
+        console.log("err from clients backend: ", err);
+      });
+
+    /* setTimeout(() => {
       let data = call.getClients();
-      localStorage.removeItem("currentFilters");
+      // localStorage.removeItem("currentFilters");
       this.setState(
         {
           loading: false,
@@ -52,7 +57,7 @@ class Clients extends Component {
         },
         this.updateClientsDisplay
       );
-    }, 1000);
+    }, 1000); */
   }
 
   submitInputChange = (newObject) => {
@@ -62,6 +67,16 @@ class Clients extends Component {
     let client = clients[index];
     client.name = name;
     client.country = country;
+
+    axios
+      .put(`http://localhost:8100/clients/${id}`, newObject)
+      .then((res) => {
+        console.log("res from update client (put) backend ", res);
+      })
+      .catch((err) =>
+        console.log("err from update client (put) backend ", err)
+      );
+
     this.setState({
       currentClients: clients,
       showPopup: !this.state.showPopup,
@@ -72,19 +87,6 @@ class Clients extends Component {
         country: "",
       },
     });
-    /*put req. to the server, updating the client
-            axios.put('http://localhost:8100/clients', {
-                id: newObject.id,
-                name: name,
-                country: country
-          })
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-          */
   };
 
   toggleEditClient = (client = null) => {

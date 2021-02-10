@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Loader from "react-loader-spinner";
+import axios from "axios";
 import {
   faUsers,
   faEnvelope,
@@ -24,14 +25,26 @@ class Analytics extends Component {
   }
 
   componentDidMount() {
-    // TODO - get from server
-    setTimeout(() => {
+    axios
+      .get("http://localhost:8100/clients")
+      .then((res) => {
+        console.log("res from clients backend: ", res.data.data);
+        if (res.data.data.length) {
+          const { data } = res.data;
+          this.setState({ loading: false, clients: data });
+        }
+      })
+      .catch((err) => {
+        console.log("err from clients backend: ", err);
+      });
+
+    /*     setTimeout(() => {
       let data = call.getClients();
       this.setState({
         loading: false,
         clients: data,
       });
-    }, 1000);
+    }, 1000); */
   }
 
   getBadges = () => {
