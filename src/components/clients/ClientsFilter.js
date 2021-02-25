@@ -107,6 +107,7 @@ const Filter = ({
         onChange={onChange}
         value={value}
         name={name}
+        defaultValue={"All"}
       />
     </div>
   );

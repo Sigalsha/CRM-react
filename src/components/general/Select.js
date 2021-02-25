@@ -1,7 +1,14 @@
 import React from "react";
 import "../../styles/general/select.css";
 
-const Select = ({ placeholder, onChange, name, optionList, value }) => {
+const Select = ({
+  placeholder,
+  onChange,
+  name,
+  optionList,
+  value,
+  defaultValue,
+}) => {
   return (
     <select
       className="text-row"
@@ -10,8 +17,9 @@ const Select = ({ placeholder, onChange, name, optionList, value }) => {
       onChange={onChange}
       placeholder={placeholder}
       optionlist={optionList}
+      defaultValue={defaultValue}
     >
-      <option defaultValue="All">All</option>
+      <option defaultValue={defaultValue}>{defaultValue}</option>
       {optionList.map((option, i) => {
         return (
           <option key={i} value={option}>

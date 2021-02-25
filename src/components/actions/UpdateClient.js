@@ -1,6 +1,13 @@
 import React, { Component } from "react";
+import {
+  UPDATE_CLIENT_HEADERS,
+  UPDATE_CLIENT_BUTTONS,
+  ACTIONS_ALERTS,
+} from "../../utils/consts";
+import Alert from "../general/Alert";
+import Datalist from "./Datalist";
+import UpdateHeader from "./UpdateHeader";
 import "../../styles/actions/updateClient.css";
-
 class UpdateClient extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +17,8 @@ class UpdateClient extends Component {
       newOwner: "",
       newEmailType: "",
       sold: false,
+      alert: false,
+      alertText: "",
     };
   }
 
@@ -26,16 +35,54 @@ class UpdateClient extends Component {
   };
 
   changeOwner = () => {
-    this.props.updateClient(this.state.newOwner);
+    const { newOwner } = this.state;
+    const { currentClient, updateClient } = this.props;
+    debugger;
+    if (!currentClient) {
+      this.setState({
+        alertText: ACTIONS_ALERTS["update"].client,
+        alert: true,
+      });
+    }
+    if (!newOwner) {
+      this.setState({
+        alertText: ACTIONS_ALERTS["update"].owner,
+        alert: true,
+      });
+    }
+
+    if (currentClient && newOwner) {
+      updateClient(newOwner);
+    }
   };
 
   changeEmailType = () => {
-    this.props.updateClient(this.state.newEmailType);
+    const { newEmailType } = this.state;
+    const { currentClient, updateClient } = this.props;
+
+    if (!currentClient) {
+      this.setState({
+        alertText: ACTIONS_ALERTS["update"].client,
+        alert: true,
+      });
+    }
+
+    if (!newEmailType) {
+      this.setState({
+        alertText: ACTIONS_ALERTS["update"].emailType,
+        alert: true,
+      });
+    }
+
+    updateClient(newEmailType);
   };
 
   declareSold = () => {
     if (this.state.sold) {
-      alert("Sale was already declared!");
+      this.setState({
+        alertText: ACTIONS_ALERTS["update"].declareSale,
+        alert: true,
+      });
     } else {
       this.setState(
         {
@@ -46,65 +93,54 @@ class UpdateClient extends Component {
     }
   };
 
+  toggleAlert = () => {
+    this.setState({ alert: !alert });
+  };
+
   render() {
-    const { owners, emailType } = this.state;
+    const { owners, emailType, alert, alertText, newOwner } = this.state;
+    console.log("newOwner", newOwner);
 
     return (
       <div className="update-client-container">
-        <UpdateHeader text={"Transfer ownership to:"} />
-        <Select
+        {alert && <Alert text={alertText} toggleAlert={this.toggleAlert} />}
+        <UpdateHeader text={UPDATE_CLIENT_HEADERS["transferOwnership"]} />
+        <Datalist
           list={owners}
           placeholder="Owner"
           onChange={this.handleOwnerChange}
           id={owners}
           mapList={owners}
         />
-        <UpdateButton onClick={this.changeOwner} text={"transfer"} />
+        <UpdateButton
+          onClick={this.changeOwner}
+          text={UPDATE_CLIENT_BUTTONS["transfer"]}
+        />
 
-        <UpdateHeader text={"Send email:"} />
-        <Select
+        <UpdateHeader text={UPDATE_CLIENT_HEADERS["sendEmail"]} />
+        <Datalist
           list={emailType}
           placeholder={emailType}
           onChange={this.handleEmailTypeChange}
           id={emailType}
           mapList={emailType}
         />
-        <UpdateButton onClick={this.changeEmailType} text={"send"} />
+        <UpdateButton
+          onClick={this.changeEmailType}
+          text={UPDATE_CLIENT_BUTTONS["send"]}
+        />
 
-        <UpdateHeader text={"Declare sale!"} />
+        <UpdateHeader text={UPDATE_CLIENT_HEADERS["declareSale"]} />
         <div className="empty-div" />
         <UpdateButton
           onClick={this.declareSold}
-          text={"declare"}
+          text={UPDATE_CLIENT_BUTTONS["declare"]}
           id="declareBtn"
         />
       </div>
     );
   }
 }
-
-const UpdateHeader = ({ text }) => {
-  return <div className="update-header">{text}</div>;
-};
-
-const Select = ({ list, placeholder, onChange, id, mapList }) => {
-  return (
-    <div className="select">
-      <input
-        className="input-text"
-        type="text"
-        list={list}
-        placeholder={placeholder}
-        onChange={onChange}
-      />
-      <datalist id={id}>
-        {mapList.map((item) => (
-          <option value={item} key={item} />
-        ))}
-      </datalist>
-    </div>
-  );
-};
 
 const UpdateButton = ({ onClick, text }) => {
   return (

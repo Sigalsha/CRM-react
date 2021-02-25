@@ -27,11 +27,10 @@
 }
 
 .exit-btn {
-  width: 100%;
-  height: 10%;
+  margin-left: auto;
 }
 
-.exitBtn:hover {
+.exit-btn:hover {
   cursor: pointer;
 }
 

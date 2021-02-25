@@ -3,7 +3,7 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
-import { CLIENTS_HEADERS, COLORS } from "../../utils/consts";
+import { CLIENTS_HEADERS, COLORS, ACTION_HEADERS } from "../../utils/consts";
 import "../../styles/actions/actions.css";
 import ClientInput from "./ClientInput";
 import UpdateClient from "./UpdateClient.js";
@@ -54,13 +54,15 @@ class Actions extends Component {
   }
 
   getCurrentClient = (event) => {
-    let clientName = event.target.value;
-    const clients = [...this.state.clients];
+    const { clients, currentClient } = this.state;
+    const { value } = event.target;
 
-    let client = clients.filter((c) => clientName === c.name);
+    let chosenClient = clients.filter((c) => value === c.name);
 
-    if (client[0]) {
-      this.setState({ currentClient: client });
+    if (chosenClient.length && chosenClient[0] !== currentClient) {
+      this.setState({ currentClient: chosenClient[0] });
+    } else if (value === "") {
+      this.setState({ currentClient: value });
     }
   };
 
@@ -78,6 +80,26 @@ class Actions extends Component {
   //             console.log(err)
   //         })
   // }
+
+  /*   axios
+      .put(`http://localhost:8100/clients/${id}`, newObject)
+      .then((res) => {
+        console.log("res from update client (put) backend ", res);
+      })
+      .catch((err) =>
+        console.log("err from update client (put) backend ", err)
+      );
+
+    this.setState({
+      currentClients: clients,
+      showPopup: !this.state.showPopup,
+      clientToEdit: {
+        id: null,
+        name: "",
+        sureName: "",
+        country: "",
+      },
+    }); */
 
   updateClient = (newDetail) => {
     const { currentClient } = this.state;
@@ -129,7 +151,8 @@ class Actions extends Component {
   };
 
   render() {
-    const { loading, clients, owners, emailType } = this.state;
+    const { loading, clients, owners, emailType, currentClient } = this.state;
+    console.log("current client", currentClient);
     if (loading) {
       return (
         <div id="loader-position">
@@ -145,7 +168,7 @@ class Actions extends Component {
     return (
       <div id="actions-container">
         <div className="actions-child">
-          <ActionHeader text={"update"} />
+          <ActionHeader text={ACTION_HEADERS["update"]} />
         </div>
         <div className="actions-child">
           <ClientInput
@@ -158,11 +181,12 @@ class Actions extends Component {
             owners={owners}
             emailType={emailType}
             updateClient={this.updateClient}
+            currentClient={currentClient}
           />
         </div>
         <div id="section" />
         <div className="actions-child">
-          <ActionHeader text={"add client"} />
+          <ActionHeader text={ACTION_HEADERS["addClient"]} />
         </div>
         <div className="actions-child">
           <AddClient addNewClient={this.addNewClient} />
@@ -172,8 +196,6 @@ class Actions extends Component {
   }
 }
 
-const ActionHeader = ({ text }) => {
-  return <h1 className="actions-header">{text}</h1>;
-};
+const ActionHeader = ({ text }) => <h1 className="actions-header">{text}</h1>;
 
 export default Actions;
