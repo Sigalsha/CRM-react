@@ -1,3 +1,5 @@
+export const URL = "http://localhost:8100/clients/";
+
 export const CLIENTS_HEADERS = {
   name: "name",
   surname: "name",
@@ -32,10 +34,16 @@ export const UPDATE_CLIENT_BUTTONS = {
 
 export const ACTIONS_ALERTS = {
   update: {
-    client: "You must choose a client!",
+    currentClient: "You must choose a client!",
     owner: "You must choose an owner!",
     emailType: "You must choose an email type!",
     declareSale: "Sale was already declared!",
+  },
+  addClient: {
+    firstName: "",
+    surname: "",
+    country: "",
+    owner: "",
   },
 };
 

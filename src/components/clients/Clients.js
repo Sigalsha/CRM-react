@@ -3,7 +3,7 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 // import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
-import { COLORS } from "../../utils/consts";
+import { URL, COLORS } from "../../utils/consts";
 import "../../styles/clients/clients.css";
 import ColumnsHeader from "./ColumnsHeader";
 import ClientsFilter from "./ClientsFilter";
@@ -32,7 +32,7 @@ class Clients extends Component {
 
   async componentDidMount() {
     axios
-      .get("http://localhost:8100/clients")
+      .get(URL)
       .then((res) => {
         console.log("res from clients backend: ", res.data.data);
         if (res.data.data.length) {
@@ -69,7 +69,7 @@ class Clients extends Component {
     client.country = country;
 
     axios
-      .put(`http://localhost:8100/clients/${id}`, newObject)
+      .put(`${URL}${id}`, newObject)
       .then((res) => {
         console.log("res from update client (put) backend ", res);
       })

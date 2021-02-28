@@ -17,7 +17,6 @@ const Select = ({
       onChange={onChange}
       placeholder={placeholder}
       optionlist={optionList}
-      defaultValue={defaultValue}
     >
       <option defaultValue={defaultValue}>{defaultValue}</option>
       {optionList.map((option, i) => {

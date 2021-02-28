@@ -13,83 +13,100 @@ class UpdateClient extends Component {
     super(props);
     this.state = {
       owners: this.props.owners,
-      emailType: this.props.emailType,
-      newOwner: "",
-      newEmailType: "",
-      sold: false,
+      emailTypes: this.props.emailTypes,
+      owner: "",
+      emailType: "",
       alert: false,
       alertText: "",
     };
   }
 
-  handleOwnerChange = (event) => {
+  handleInputChange = (event) => {
+    const {
+      target: { value, name },
+    } = event;
+    debugger;
     this.setState({
-      newOwner: event.target.value,
+      [name]: value,
     });
   };
 
-  handleEmailTypeChange = (event) => {
-    this.setState({
-      newEmailType: event.target.value,
-    });
-  };
+  /*   validateAction = (clientAction, alertType) => {
+    if (!clientAction) {
+      this.setState({
+        alertText: ACTIONS_ALERTS["update"][alertType],
+        alert: true,
+      });
+    }
+    return;
+  }; */
 
   changeOwner = () => {
-    const { newOwner } = this.state;
+    const { owner } = this.state;
     const { currentClient, updateClient } = this.props;
     debugger;
+
     if (!currentClient) {
       this.setState({
-        alertText: ACTIONS_ALERTS["update"].client,
+        alertText: ACTIONS_ALERTS["update"]["currentClient"],
         alert: true,
       });
-    }
-    if (!newOwner) {
-      this.setState({
-        alertText: ACTIONS_ALERTS["update"].owner,
-        alert: true,
-      });
+      return;
     }
 
-    if (currentClient && newOwner) {
-      updateClient(newOwner);
+    if (!owner) {
+      this.setState({
+        alertText: ACTIONS_ALERTS["update"]["owner"],
+        alert: true,
+      });
+      return;
     }
+
+    updateClient({ id: currentClient._id, owner });
   };
 
   changeEmailType = () => {
-    const { newEmailType } = this.state;
+    const { emailType } = this.state;
     const { currentClient, updateClient } = this.props;
 
+    debugger;
     if (!currentClient) {
       this.setState({
-        alertText: ACTIONS_ALERTS["update"].client,
+        alertText: ACTIONS_ALERTS["update"]["currentClient"],
         alert: true,
       });
+      return;
     }
 
-    if (!newEmailType) {
+    if (!emailType) {
       this.setState({
-        alertText: ACTIONS_ALERTS["update"].emailType,
+        alertText: ACTIONS_ALERTS["update"]["emailType"],
         alert: true,
       });
+      return;
     }
 
-    updateClient(newEmailType);
+    updateClient({ id: currentClient._id, emailType });
   };
 
   declareSold = () => {
-    if (this.state.sold) {
+    const { currentClient, updateClient } = this.props;
+    debugger;
+    if (currentClient && currentClient.sold) {
       this.setState({
-        alertText: ACTIONS_ALERTS["update"].declareSale,
+        alertText: ACTIONS_ALERTS["update"]["declareSale"],
         alert: true,
       });
+      return;
     } else {
-      this.setState(
-        {
-          sold: true,
-        },
-        () => this.props.updateClient(this.state.sold)
-      );
+      if (!currentClient) {
+        this.setState({
+          alertText: ACTIONS_ALERTS["update"]["currentClient"],
+          alert: true,
+        });
+        return;
+      }
+      updateClient({ id: currentClient._id, sold: true });
     }
   };
 
@@ -98,8 +115,7 @@ class UpdateClient extends Component {
   };
 
   render() {
-    const { owners, emailType, alert, alertText, newOwner } = this.state;
-    console.log("newOwner", newOwner);
+    const { owners, emailTypes, alert, alertText } = this.state;
 
     return (
       <div className="update-client-container">
@@ -108,9 +124,10 @@ class UpdateClient extends Component {
         <Datalist
           list={owners}
           placeholder="Owner"
-          onChange={this.handleOwnerChange}
           id={owners}
           mapList={owners}
+          name="owner"
+          onChange={this.handleInputChange}
         />
         <UpdateButton
           onClick={this.changeOwner}
@@ -119,11 +136,12 @@ class UpdateClient extends Component {
 
         <UpdateHeader text={UPDATE_CLIENT_HEADERS["sendEmail"]} />
         <Datalist
-          list={emailType}
-          placeholder={emailType}
-          onChange={this.handleEmailTypeChange}
-          id={emailType}
-          mapList={emailType}
+          list={emailTypes}
+          placeholder="Email Type"
+          id={emailTypes}
+          mapList={emailTypes}
+          name="emailType"
+          onChange={this.handleInputChange}
         />
         <UpdateButton
           onClick={this.changeEmailType}
@@ -135,7 +153,6 @@ class UpdateClient extends Component {
         <UpdateButton
           onClick={this.declareSold}
           text={UPDATE_CLIENT_BUTTONS["declare"]}
-          id="declareBtn"
         />
       </div>
     );

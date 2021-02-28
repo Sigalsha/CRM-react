@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/actions/datalist.css";
 
-const Datalist = ({ list, placeholder, onChange, id, mapList }) => {
+const Datalist = ({ list, placeholder, name, onChange, id, mapList }) => {
   return (
     <div className="datalist-wrapper">
       <input
@@ -9,6 +9,7 @@ const Datalist = ({ list, placeholder, onChange, id, mapList }) => {
         type="text"
         list={list}
         placeholder={placeholder}
+        name={name}
         onChange={onChange}
       />
       <datalist id={id}>

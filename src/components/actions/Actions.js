@@ -3,7 +3,12 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
-import { CLIENTS_HEADERS, COLORS, ACTION_HEADERS } from "../../utils/consts";
+import {
+  URL,
+  CLIENTS_HEADERS,
+  COLORS,
+  ACTION_HEADERS,
+} from "../../utils/consts";
 import "../../styles/actions/actions.css";
 import ClientInput from "./ClientInput";
 import UpdateClient from "./UpdateClient.js";
@@ -21,7 +26,7 @@ class Actions extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8100/clients")
+      .get(URL)
       .then((res) => {
         console.log("res from clients backend: ", res.data.data);
         if (res.data.data.length) {
@@ -81,8 +86,26 @@ class Actions extends Component {
   //         })
   // }
 
-  /*   axios
-      .put(`http://localhost:8100/clients/${id}`, newObject)
+  updateClient = (updatedClientData) => {
+    const { currentClient } = this.state;
+
+    const updatedClient = {
+      emailType: updatedClientData.emailType
+        ? updatedClientData.emailType
+        : currentClient.emailType,
+      sold: updatedClientData.sold
+        ? updatedClientData.sold
+        : currentClient.sold,
+      owner: updatedClientData.owner
+        ? updatedClientData.owner
+        : currentClient.owner,
+    };
+
+    axios
+      .put(`${URL}${currentClient._id}`, {
+        ...currentClient,
+        ...updatedClient,
+      })
       .then((res) => {
         console.log("res from update client (put) backend ", res);
       })
@@ -90,35 +113,10 @@ class Actions extends Component {
         console.log("err from update client (put) backend ", err)
       );
 
-    this.setState({
-      currentClients: clients,
-      showPopup: !this.state.showPopup,
-      clientToEdit: {
-        id: null,
-        name: "",
-        sureName: "",
-        country: "",
-      },
-    }); */
+    this.setState({ currentClient: { ...currentClient, ...updatedClient } });
 
-  updateClient = (newDetail) => {
-    const { currentClient } = this.state;
-    // let client = currentClient;
-    // this.sendUpdatedClient(client, newDetail)
+    // this.sendUpdatedClient(client, updatedClient)
   };
-
-  // const mapped = clients.map((c, i) => { return { i: i, client: c } })
-  // console.log(mapped)
-  // const filtered = mapped.filter(c => c.client.name === client.name)
-  // console.log(filtered)
-  // let index = filtered[0].i
-  // // filtered[0].client
-  // // let index = utils.findClientIndex(clients, client)
-  // client.owner = newOwner
-  // clients[index].client = client
-  // this.setState({
-  //     clients: clients
-  // })
 
   addNewClient = (newClient) => {
     // post req.to the server, adding new client:
@@ -179,7 +177,7 @@ class Actions extends Component {
         <div className="actions-child">
           <UpdateClient
             owners={owners}
-            emailType={emailType}
+            emailTypes={emailType}
             updateClient={this.updateClient}
             currentClient={currentClient}
           />

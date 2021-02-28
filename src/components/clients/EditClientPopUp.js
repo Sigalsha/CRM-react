@@ -27,7 +27,7 @@ class EditClientPopUp extends Component {
     const { submitInputChange } = this.props;
     let { id, firstName, sureName, country } = this.state;
     newObject.id = id;
-    newObject.name = firstName + " " + sureName;
+    newObject.name = `${firstName} ${sureName}`;
     newObject.country = country;
 
     submitInputChange(newObject);

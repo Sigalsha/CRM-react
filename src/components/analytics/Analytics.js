@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
-import { COLORS } from "../../utils/consts";
+import { URL, COLORS } from "../../utils/consts";
 import "../../styles/analytics/analytics.css";
 import TopEmployees from "./charts/TopEmployees";
 import SalesByMonth from "./charts/SalesByMonth";
@@ -26,7 +26,7 @@ class Analytics extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8100/clients")
+      .get(URL)
       .then((res) => {
         console.log("res from clients backend: ", res.data.data);
         if (res.data.data.length) {

@@ -24,7 +24,6 @@ class ClientInput extends Component {
 
   render() {
     const { clients, currentClient } = this.state;
-    console.log("clients", clients);
 
     console.log("current client from client input", currentClient);
 
@@ -37,6 +36,7 @@ class ClientInput extends Component {
           onChange={this.handleChange}
           id={clients}
           mapList={clients}
+          name="clientName"
         />
       </div>
     );
