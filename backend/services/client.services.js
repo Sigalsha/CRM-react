@@ -61,6 +61,8 @@ exports.updateClient = async function(updatedC) {
         name: updatedC.name,
         country: updatedC.country,
         owner: updatedC.owner,
+        sold: updatedC.sold,
+        emailType: updatedC.emailType,
       },
       { new: true },
       (data, err) => {

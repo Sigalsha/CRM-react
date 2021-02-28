@@ -5,7 +5,6 @@ const Promise = require("bluebird");
 Promise.promisifyAll(fs);
 const Client = require("../models/ClientModel.js");
 const ClientController = require("../controllers/client.controllers");
-const ClientService = require("../services/client.services");
 
 //GET - get all the clients form DB:
 router.get("/clients", ClientController.getClients);
