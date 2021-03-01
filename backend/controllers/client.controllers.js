@@ -24,9 +24,9 @@ exports.updateClient = async function(req, res, next) {
     id: req.params.id,
     name: req.body.name ? req.body.name : "",
     country: req.body.country ? req.body.country : "",
-    sold: req.body.sold ? req.body.sold : "",
+    sold: req.body.sold ? req.body.sold : false,
     owner: req.body.owner ? req.body.owner : "",
-    emailType: req.body.emailType ? req.body.emailType : "",
+    emailType: req.body.emailType ? req.body.emailType : null,
   };
 
   console.log("updatedClient in ctrl", updatedClient);
