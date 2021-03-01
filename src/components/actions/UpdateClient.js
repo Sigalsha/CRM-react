@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import {
-  UPDATE_CLIENT_HEADERS,
-  UPDATE_CLIENT_BUTTONS,
   ACTIONS_ALERTS,
+  ACTION_HEADERS,
+  ACTIONS_BUTTONS,
 } from "../../utils/consts";
 import Alert from "../general/Alert";
 import Datalist from "./Datalist";
-import UpdateHeader from "./UpdateHeader";
+import ActionSubHeader from "./ActionSubHeader";
 import "../../styles/actions/updateClient.css";
 class UpdateClient extends Component {
   constructor(props) {
@@ -25,7 +25,6 @@ class UpdateClient extends Component {
     const {
       target: { value, name },
     } = event;
-    debugger;
     this.setState({
       [name]: value,
     });
@@ -44,7 +43,6 @@ class UpdateClient extends Component {
   changeOwner = () => {
     const { owner } = this.state;
     const { currentClient, updateClient } = this.props;
-    debugger;
 
     if (!currentClient) {
       this.setState({
@@ -69,7 +67,6 @@ class UpdateClient extends Component {
     const { emailType } = this.state;
     const { currentClient, updateClient } = this.props;
 
-    debugger;
     if (!currentClient) {
       this.setState({
         alertText: ACTIONS_ALERTS["update"]["currentClient"],
@@ -91,7 +88,7 @@ class UpdateClient extends Component {
 
   declareSold = () => {
     const { currentClient, updateClient } = this.props;
-    debugger;
+
     if (currentClient && currentClient.sold) {
       this.setState({
         alertText: ACTIONS_ALERTS["update"]["declareSale"],
@@ -120,7 +117,10 @@ class UpdateClient extends Component {
     return (
       <div className="update-client-container">
         {alert && <Alert text={alertText} toggleAlert={this.toggleAlert} />}
-        <UpdateHeader text={UPDATE_CLIENT_HEADERS["transferOwnership"]} />
+        <ActionSubHeader
+          headerType="update"
+          text={ACTION_HEADERS["update"]["transferOwnership"]}
+        />
         <Datalist
           list={owners}
           placeholder="Owner"
@@ -131,10 +131,13 @@ class UpdateClient extends Component {
         />
         <UpdateButton
           onClick={this.changeOwner}
-          text={UPDATE_CLIENT_BUTTONS["transfer"]}
+          text={ACTIONS_BUTTONS["update"]["transfer"]}
         />
 
-        <UpdateHeader text={UPDATE_CLIENT_HEADERS["sendEmail"]} />
+        <ActionSubHeader
+          headerType="update"
+          text={ACTION_HEADERS["update"]["sendEmail"]}
+        />
         <Datalist
           list={emailTypes}
           placeholder="Email Type"
@@ -145,14 +148,17 @@ class UpdateClient extends Component {
         />
         <UpdateButton
           onClick={this.changeEmailType}
-          text={UPDATE_CLIENT_BUTTONS["send"]}
+          text={ACTIONS_BUTTONS["update"]["send"]}
         />
 
-        <UpdateHeader text={UPDATE_CLIENT_HEADERS["declareSale"]} />
+        <ActionSubHeader
+          headerType="update"
+          text={ACTION_HEADERS["update"]["declareSale"]}
+        />
         <div className="empty-div" />
         <UpdateButton
           onClick={this.declareSold}
-          text={UPDATE_CLIENT_BUTTONS["declare"]}
+          text={ACTIONS_BUTTONS["update"]["declare"]}
         />
       </div>
     );

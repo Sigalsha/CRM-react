@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { UPDATE_CLIENT_HEADERS } from "../../utils/consts";
-import UpdateHeader from "./UpdateHeader";
+import { ACTION_HEADERS } from "../../utils/consts";
+import ActionSubHeader from "./ActionSubHeader";
 import Datalist from "./Datalist";
 import "../../styles/actions/clientInput.css";
 
@@ -29,7 +29,7 @@ class ClientInput extends Component {
 
     return (
       <div className="client-input-container">
-        <UpdateHeader text={UPDATE_CLIENT_HEADERS["client"]} />
+        <ActionSubHeader text={ACTION_HEADERS["update"]["client"]} />
         <Datalist
           list={clients}
           placeholder="Client Name"

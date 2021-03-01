@@ -15,21 +15,25 @@ export const EMAIL_TYPES = ["A", "B", "C", "D", "No Type"];
 export const IS_SOLD = ["Sold", "Not sold"];
 
 export const ACTION_HEADERS = {
-  update: "update",
-  addClient: "add client",
+  main: { update: "update", addClient: "add client" },
+  update: {
+    client: "Client:",
+    transferOwnership: "Transfer ownership to:",
+    sendEmail: "Send email:",
+    declareSale: "Declare sale!",
+  },
+  add: {
+    firstName: "First Name:",
+    surname: "Surname:",
+    country: "Country:",
+    owner: "Owner:",
+    emailType: "Email Type:",
+  },
 };
 
-export const UPDATE_CLIENT_HEADERS = {
-  client: "Client:",
-  transferOwnership: "Transfer ownership to:",
-  sendEmail: "Send email:",
-  declareSale: "Declare sale!",
-};
-
-export const UPDATE_CLIENT_BUTTONS = {
-  transfer: "transfer",
-  send: "send",
-  declare: "declare",
+export const ACTIONS_BUTTONS = {
+  update: { transfer: "transfer", send: "send", declare: "declare" },
+  add: { addNew: "Add New Client" },
 };
 
 export const ACTIONS_ALERTS = {
@@ -40,10 +44,10 @@ export const ACTIONS_ALERTS = {
     declareSale: "Sale was already declared!",
   },
   addClient: {
-    firstName: "",
-    surname: "",
-    country: "",
-    owner: "",
+    firstName: "You must add the client's firstname",
+    surname: "You must add the client's surname",
+    country: "You must add the client's country",
+    owner: "You must add the client's owner",
   },
 };
 

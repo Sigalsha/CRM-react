@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Loader from "react-loader-spinner";
 import axios from "axios";
 // import call from "../../ApiCalls/ApiCalls";
-import utils from "../../utils/utils";
+// import utils from "../../utils/utils";
 import { URL, COLORS } from "../../utils/consts";
 import "../../styles/clients/clients.css";
 import ColumnsHeader from "./ColumnsHeader";
@@ -31,6 +31,21 @@ class Clients extends Component {
   }
 
   async componentDidMount() {
+    this.getClientsFromServer();
+    /* setTimeout(() => {
+      let data = call.getClients();
+      // localStorage.removeItem("currentFilters");
+      this.setState(
+        {
+          loading: false,
+          clients: data,
+        },
+        this.updateClientsDisplay
+      );
+    }, 1000); */
+  }
+
+  async getClientsFromServer() {
     axios
       .get(URL)
       .then((res) => {
@@ -46,30 +61,13 @@ class Clients extends Component {
       .catch((err) => {
         console.log("err from clients backend: ", err);
       });
-
-    /* setTimeout(() => {
-      let data = call.getClients();
-      // localStorage.removeItem("currentFilters");
-      this.setState(
-        {
-          loading: false,
-          clients: data,
-        },
-        this.updateClientsDisplay
-      );
-    }, 1000); */
   }
 
-  submitInputChange = (newObject) => {
-    let { id, name, country } = newObject;
-    const clients = [...this.state.currentClients];
-    let index = utils.findClientIndexById(clients, id);
-    let client = clients[index];
-    client.name = name;
-    client.country = country;
+  submitInputChange = (updatedClient) => {
+    const { clientToEdit, showPopup } = this.state;
 
     axios
-      .put(`${URL}${id}`, newObject)
+      .put(`${URL}${clientToEdit.id}`, updatedClient)
       .then((res) => {
         console.log("res from update client (put) backend ", res);
       })
@@ -77,16 +75,20 @@ class Clients extends Component {
         console.log("err from update client (put) backend ", err)
       );
 
-    this.setState({
-      currentClients: clients,
-      showPopup: !this.state.showPopup,
-      clientToEdit: {
-        id: null,
-        name: "",
-        sureName: "",
-        country: "",
+    this.setState(
+      {
+        showPopup: !showPopup,
+        clientToEdit: {
+          id: null,
+          name: "",
+          country: "",
+          owner: "",
+          sold: false,
+          emailType: null,
+        },
       },
-    });
+      this.getClientsFromServer
+    );
   };
 
   toggleEditClient = (client = null) => {
@@ -94,10 +96,12 @@ class Clients extends Component {
     this.setState({
       showPopup: !showPopup,
       clientToEdit: client && {
-        id: client.id,
-        name: client.firstName,
-        sureName: client.sureName,
-        country: client.country,
+        id: client.id ? client.id : "",
+        name: client.name ? client.name : "",
+        country: client.country ? client.country : "",
+        owner: client.owner ? client.owner : "",
+        emailType: client.emailType ? client.emailType : null,
+        sold: client.sold ? client.sold : false,
       },
     });
   };
@@ -233,6 +237,7 @@ class Clients extends Component {
       showPopup,
       clientToEdit,
     } = this.state;
+    console.log("clientToEdit", clientToEdit);
 
     if (loading) {
       return (

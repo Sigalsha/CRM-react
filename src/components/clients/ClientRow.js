@@ -1,7 +1,7 @@
 import React from "react";
 import ClientData from "./ClientData";
 
-const ClientRow = ({ clients, submitInputChange, toggleEditClient }) => {
+const ClientRow = ({ clients, toggleEditClient }) => {
   return (
     <tbody>
       {clients &&

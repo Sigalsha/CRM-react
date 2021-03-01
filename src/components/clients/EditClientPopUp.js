@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import "../../styles/clients/editClientPopUp.css";
-
 class EditClientPopUp extends Component {
   state = {
-    id: this.props.clientToEdit.id,
-    firstName: this.props.clientToEdit.name,
-    sureName: this.props.clientToEdit.sureName,
+    firstName: this.props.clientToEdit.name.split(" ")[0],
+    sureName: this.props.clientToEdit.name.split(" ")[1],
     country: this.props.clientToEdit.country,
   };
 
@@ -23,25 +21,25 @@ class EditClientPopUp extends Component {
   };
 
   handleSubmit = () => {
-    let newObject = {};
-    const { submitInputChange } = this.props;
-    let { id, firstName, sureName, country } = this.state;
-    newObject.id = id;
-    newObject.name = `${firstName} ${sureName}`;
-    newObject.country = country;
+    const { submitInputChange, clientToEdit } = this.props;
+    let { firstName, sureName, country } = this.state;
 
-    submitInputChange(newObject);
+    const clientToUpdate = {
+      name:
+        firstName && sureName ? `${firstName} ${sureName}` : clientToEdit.name,
+      country: country ? country : clientToEdit.country,
+    };
+
+    submitInputChange({ ...clientToEdit, ...clientToUpdate });
   };
 
   render() {
-    const { id, firstName, sureName, country } = this.state;
-    const { toggleEditClient } = this.props;
-
-    console.log("this.props.clientToEdit", this.props.clientToEdit);
+    const { firstName, sureName, country } = this.state;
+    const { toggleEditClient, clientToEdit } = this.props;
 
     return (
       <div className="popup-wrapper">
-        <div className="popup-container" id={id}>
+        <div className="popup-container" id={clientToEdit.id}>
           <div className="exit-btn" onClick={toggleEditClient}>
             X
           </div>

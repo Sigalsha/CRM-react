@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { ACTION_HEADERS, ACTIONS_BUTTONS } from "../../utils/consts";
+import ActionSubHeader from "./ActionSubHeader";
 import "../../styles/actions/addClient.css";
 
 class AddClient extends Component {
@@ -9,6 +11,7 @@ class AddClient extends Component {
       sureName: "",
       country: "",
       owner: "",
+      emailType: null,
     };
   }
 
@@ -46,46 +49,49 @@ class AddClient extends Component {
         sureName: "",
         country: "",
         owner: "",
+        emailType: null,
       });
     }
   };
 
   render() {
-    let { firstName, sureName, country, owner } = this.state;
+    let { firstName, sureName, country, owner, emailType } = this.state;
     return (
       <div className="add-client-container">
-        <InputHeader text={"First Name:"} />
+        <ActionSubHeader text={ACTION_HEADERS["add"]["firstName"]} />
         <Input
-          name={"firstName"}
+          name="firstName"
           value={firstName}
           onChange={this.handleInputChange}
         />
-        <InputHeader text={"Surname:"} />
+        <ActionSubHeader text={ACTION_HEADERS["add"]["surname"]} />
         <Input
           name={"sureName"}
           value={sureName}
           onChange={this.handleInputChange}
         />
-        <InputHeader text={"Country:"} />
+        <ActionSubHeader text={ACTION_HEADERS["add"]["country"]} />
         <Input
           name={"country"}
           value={country}
           onChange={this.handleInputChange}
         />
-        <InputHeader text={"Owner:"} />
-        <Input name={"owner"} value={owner} onChange={this.handleInputChange} />
+        <ActionSubHeader text={ACTION_HEADERS["add"]["owner"]} />
+        <Input name="owner" value={owner} onChange={this.handleInputChange} />
+        <ActionSubHeader text={ACTION_HEADERS["add"]["emailType"]} />
+        <Input
+          name="emailType"
+          value={emailType}
+          onChange={this.handleInputChange}
+        />
         <AddNewClientBtn
           onClick={this.handleAddClient}
-          text={"Add New Client"}
+          text={ACTIONS_BUTTONS["add"]["addNew"]}
         />
       </div>
     );
   }
 }
-
-const InputHeader = ({ text }) => {
-  return <div className="input-header">{text}</div>;
-};
 
 const Input = ({ name, value, onChange }) => {
   return (

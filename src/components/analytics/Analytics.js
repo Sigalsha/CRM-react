@@ -7,7 +7,7 @@ import {
   faUserPlus,
   faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
-import call from "../../ApiCalls/ApiCalls";
+// import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
 import { URL, COLORS } from "../../utils/consts";
 import "../../styles/analytics/analytics.css";

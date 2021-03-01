@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Loader from "react-loader-spinner";
 import axios from "axios";
-import call from "../../ApiCalls/ApiCalls";
+// import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
 import {
   URL,
@@ -121,7 +121,7 @@ class Actions extends Component {
   addNewClient = (newClient) => {
     // post req.to the server, adding new client:
 
-    // axios.post('http://localhost:8100/actions/:client', {
+    // axios.post(`${URL}add`, {
     //     name: newClient.name,
     //     country: newClient.country,
     //     owner: newClient.owner
@@ -150,7 +150,7 @@ class Actions extends Component {
 
   render() {
     const { loading, clients, owners, emailType, currentClient } = this.state;
-    console.log("current client", currentClient);
+
     if (loading) {
       return (
         <div id="loader-position">
@@ -166,7 +166,7 @@ class Actions extends Component {
     return (
       <div id="actions-container">
         <div className="actions-child">
-          <ActionHeader text={ACTION_HEADERS["update"]} />
+          <ActionHeader text={ACTION_HEADERS["main"]["update"]} />
         </div>
         <div className="actions-child">
           <ClientInput
@@ -184,7 +184,7 @@ class Actions extends Component {
         </div>
         <div id="section" />
         <div className="actions-child">
-          <ActionHeader text={ACTION_HEADERS["addClient"]} />
+          <ActionHeader text={ACTION_HEADERS["main"]["addClient"]} />
         </div>
         <div className="actions-child">
           <AddClient addNewClient={this.addNewClient} />
