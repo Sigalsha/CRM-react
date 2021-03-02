@@ -44,7 +44,7 @@ export const ACTIONS_ALERTS = {
     declareSale: "Sale was already declared!",
   },
   addClient: {
-    firstName: "You must add the client's firstname",
+    firstName: "You must add the client's first name",
     surname: "You must add the client's surname",
     country: "You must add the client's country",
     owner: "You must add the client's owner",

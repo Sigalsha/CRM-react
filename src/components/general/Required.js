@@ -1,0 +1,15 @@
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAsterisk } from "@fortawesome/free-solid-svg-icons";
+import "../../styles/general/required.css";
+
+const Required = ({ isClient }) => {
+  return (
+    <FontAwesomeIcon
+      icon={faAsterisk}
+      className={isClient ? "main client-input" : "main add-client"}
+    />
+  );
+};
+
+export default Required;

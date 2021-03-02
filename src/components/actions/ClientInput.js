@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ACTION_HEADERS } from "../../utils/consts";
+import Required from "../general/Required";
 import ActionSubHeader from "./ActionSubHeader";
 import Datalist from "./Datalist";
 import "../../styles/actions/clientInput.css";
@@ -29,6 +30,7 @@ class ClientInput extends Component {
 
     return (
       <div className="client-input-container">
+        <Required isClient="true" />
         <ActionSubHeader text={ACTION_HEADERS["update"]["client"]} />
         <Datalist
           list={clients}

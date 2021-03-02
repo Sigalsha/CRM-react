@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { ACTION_HEADERS, ACTIONS_BUTTONS } from "../../utils/consts";
+import {
+  ACTION_HEADERS,
+  ACTIONS_BUTTONS,
+  ACTIONS_ALERTS,
+} from "../../utils/consts";
+import Alert from "../general/Alert";
+import Required from "../general/Required";
 import ActionSubHeader from "./ActionSubHeader";
 import "../../styles/actions/addClient.css";
 
@@ -8,10 +14,11 @@ class AddClient extends Component {
     super();
     this.state = {
       firstName: "",
-      sureName: "",
+      surname: "",
       country: "",
       owner: "",
-      emailType: null,
+      alert: false,
+      alertText: "",
     };
   }
 
@@ -34,55 +41,77 @@ class AddClient extends Component {
     return;
   };
 
+  validateAction = (clientAction, alertType) => {
+    if (!clientAction) {
+      this.setState({
+        alertText: ACTIONS_ALERTS["addClient"][alertType],
+        alert: true,
+      });
+      return false;
+    }
+    return true;
+  };
+
+  toggleAlert = () => {
+    this.setState({ alert: !alert });
+  };
+
   handleAddClient = () => {
-    let newClient = {};
-    let { firstName, sureName, country, owner } = this.state;
-    newClient.name = firstName + " " + sureName;
-    newClient.country = country;
-    newClient.owner = owner;
+    const { firstName, surname, country, owner } = this.state;
+    debugger;
+
+    if (
+      !this.validateAction(firstName, "firstName") ||
+      !this.validateAction(surname, "surname") ||
+      !this.validateAction(country, "country") ||
+      !this.validateAction(owner, "owner")
+    ) {
+      return;
+    }
+
+    const newClient = {
+      name: `${firstName} ${surname}`,
+      country: country,
+      owner: owner,
+    };
+
     if (this.checkNewClientDetails(newClient) === false) {
       alert("please add all the client's details!");
-    } else {
-      this.props.addNewClient(newClient);
-      this.setState({
-        firstName: "",
-        sureName: "",
-        country: "",
-        owner: "",
-        emailType: null,
-      });
     }
+
+    this.props.addNewClient(newClient);
+    this.setState({
+      firstName: "",
+      surname: "",
+      country: "",
+      owner: "",
+    });
   };
 
   render() {
-    let { firstName, sureName, country, owner, emailType } = this.state;
+    let { firstName, surname, country, owner, alert, alertText } = this.state;
     return (
       <div className="add-client-container">
-        <ActionSubHeader text={ACTION_HEADERS["add"]["firstName"]} />
-        <Input
-          name="firstName"
-          value={firstName}
-          onChange={this.handleInputChange}
+        {alert && <Alert text={alertText} toggleAlert={this.toggleAlert} />}
+        <InputWrapper
+          inputType={firstName}
+          inputTypeString="firstName"
+          handleInputChange={this.handleInputChange}
         />
-        <ActionSubHeader text={ACTION_HEADERS["add"]["surname"]} />
-        <Input
-          name={"sureName"}
-          value={sureName}
-          onChange={this.handleInputChange}
+        <InputWrapper
+          inputType={surname}
+          inputTypeString="surname"
+          handleInputChange={this.handleInputChange}
         />
-        <ActionSubHeader text={ACTION_HEADERS["add"]["country"]} />
-        <Input
-          name={"country"}
-          value={country}
-          onChange={this.handleInputChange}
+        <InputWrapper
+          inputType={country}
+          inputTypeString="country"
+          handleInputChange={this.handleInputChange}
         />
-        <ActionSubHeader text={ACTION_HEADERS["add"]["owner"]} />
-        <Input name="owner" value={owner} onChange={this.handleInputChange} />
-        <ActionSubHeader text={ACTION_HEADERS["add"]["emailType"]} />
-        <Input
-          name="emailType"
-          value={emailType}
-          onChange={this.handleInputChange}
+        <InputWrapper
+          inputType={owner}
+          inputTypeString="owner"
+          handleInputChange={this.handleInputChange}
         />
         <AddNewClientBtn
           onClick={this.handleAddClient}
@@ -93,13 +122,27 @@ class AddClient extends Component {
   }
 }
 
+const InputWrapper = ({ inputType, inputTypeString, handleInputChange }) => {
+  return (
+    <div style={{ display: "inline-flex", width: "100%" }}>
+      <Required />
+      <ActionSubHeader text={ACTION_HEADERS["add"][inputTypeString]} />
+      <Input
+        name={inputTypeString}
+        value={inputType}
+        onChange={handleInputChange}
+      />
+    </div>
+  );
+};
+
 const Input = ({ name, value, onChange }) => {
   return (
     <input
       className="input-add-client"
       type="text"
       name={name}
-      value={value}
+      value={value ? value : ""}
       onChange={onChange}
     />
   );

@@ -25,6 +25,21 @@ class Actions extends Component {
   }
 
   componentDidMount() {
+    this.getClientsFromServer();
+    /*  setTimeout(() => {
+      let data = call.getClients();
+      this.setState({
+        loading: false,
+        clients: data,
+        owners: utils.reduceDuplications(
+          utils.getClientProperty(CLIENTS_HEADERS["owner"], data)
+        ),
+        currentClient: "",
+      });
+    }, 1000); */
+  }
+
+  async getClientsFromServer() {
     axios
       .get(URL)
       .then((res) => {
@@ -44,18 +59,6 @@ class Actions extends Component {
       .catch((err) => {
         console.log("err from clients backend: ", err);
       });
-
-    /*  setTimeout(() => {
-      let data = call.getClients();
-      this.setState({
-        loading: false,
-        clients: data,
-        owners: utils.reduceDuplications(
-          utils.getClientProperty(CLIENTS_HEADERS["owner"], data)
-        ),
-        currentClient: "",
-      });
-    }, 1000); */
   }
 
   getCurrentClient = (event) => {
@@ -119,33 +122,25 @@ class Actions extends Component {
   };
 
   addNewClient = (newClient) => {
-    // post req.to the server, adding new client:
+    const { clients } = this.state;
+    debugger;
+    axios
+      .post(`${URL}add`, newClient)
+      .then((res) => {
+        console.log("res from add new client (post) backend ", res);
+      })
+      .catch((err) => {
+        console.log("err from add new client (post) backend ", err);
+      });
 
-    // axios.post(`${URL}add`, {
-    //     name: newClient.name,
-    //     country: newClient.country,
-    //     owner: newClient.owner
-    // })
-    //     .then((res) => {
-    //         console.log(res);
-    //         setState({
-    //             clients: clients
-    //         })
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-    //should get the client from the server with an Id, than update it in the state?
-    //Or get all the clients including the new client
-
-    const clients = [...this.state.clients];
-    clients.push(newClient);
     this.setState(
       {
-        clients: clients,
+        clients: [...clients, newClient],
       },
-      () => alert(`${clients[clients.length - 1].name} has been added`)
+      this.getClientsFromServer
     );
+    //should get the client from the server with an Id, than update it in the state?
+    //Or get all the clients including the new client
   };
 
   render() {

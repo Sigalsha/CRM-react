@@ -10,12 +10,6 @@
   color: black;
 }
 
-.input-header {
-  width: 35%;
-  background-color: transparent;
-  margin-top: 1%;
-}
-
 .input-add-client {
   width: 40%;
   background-color: transparent;
@@ -57,10 +51,6 @@
 @media screen and (max-width: 700px) {
   .add-client-container {
     width: 90%;
-  }
-
-  .input-header {
-    margin-top: 1.5%;
   }
 
   .input-add-client {

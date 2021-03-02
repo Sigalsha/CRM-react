@@ -30,7 +30,7 @@ class Clients extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getClientsFromServer();
     /* setTimeout(() => {
       let data = call.getClients();
@@ -45,7 +45,7 @@ class Clients extends Component {
     }, 1000); */
   }
 
-  async getClientsFromServer() {
+  getClientsFromServer() {
     axios
       .get(URL)
       .then((res) => {
