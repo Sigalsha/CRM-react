@@ -98,11 +98,11 @@ exports.updateClient = async function(updatedC) {
   }
 };
 
-exports.addNewClient = function({ name, owner, country }) {
+exports.addNewClient = async function({ name, owner, country }) {
   console.log("req params/body from ctrl - addNewClient", owner, name, country);
 
   try {
-    const newClient = new Client({
+    const newClient = await new Client({
       name,
       owner,
       country,
