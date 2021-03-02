@@ -42,32 +42,4 @@ router.put("/clients/:id", ClientController.updateClient);
   );
 });*/
 
-router.get("/actions", function(req, res) {
-  Client.find({ _id: _id, name: name, owner: owner }, (err, data) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(data);
-    res.send(data);
-  });
-});
-
-router.put("/actions/update", function(req, res) {
-  let { _id, owner, emailType, sold } = req.body;
-  Client.findByIdAndUpdate(
-    { _id: _id },
-    { owner: owner },
-    { emailType: emailType },
-    { sold: sold },
-    { new: true },
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log(result);
-      res.send(result);
-    }
-  );
-});
-
 module.exports = router;

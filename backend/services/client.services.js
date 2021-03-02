@@ -108,6 +108,7 @@ exports.addNewClient = function({ name, owner, country }) {
       country,
       firstContact: new Date(),
       sold: false,
+      emailType: null,
     });
 
     newClient.save((err, data) => {

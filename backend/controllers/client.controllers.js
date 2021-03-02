@@ -4,7 +4,6 @@ const Client = require("../models/ClientModel");
 exports.getClients = async function(req, res, next) {
   try {
     const clients = await ClientService.getClients();
-    // console.log("clients in ctrl - ", clients);
 
     return res.status(200).json({
       status: 200,
@@ -54,7 +53,8 @@ exports.addNewClient = async function(req, res, next) {
       owner,
       country,
     });
-    await console.log("new client ", newClient);
+
+    console.log("new client ", newClient);
 
     return res.status(200).json({
       status: 200,
