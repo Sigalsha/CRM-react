@@ -1,11 +1,19 @@
 import React from "react";
 import "../../styles/actions/datalist.css";
 
-const Datalist = ({ list, placeholder, name, onChange, id, mapList }) => {
+const Datalist = ({
+  list,
+  placeholder,
+  name,
+  onChange,
+  id,
+  mapList,
+  isAddClient,
+}) => {
   return (
-    <div className="datalist-wrapper">
+    <div className={isAddClient ? "datalist-add-client" : "datalist-wrapper"}>
       <input
-        className="input-text"
+        className={`input-text ${isAddClient ? "input-text-add-client" : ""}`}
         type="text"
         list={list}
         placeholder={placeholder}

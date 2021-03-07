@@ -6,17 +6,19 @@ import {
 } from "../../utils/consts";
 import Alert from "../general/Alert";
 import Required from "../general/Required";
+import Datalist from "./Datalist";
 import ActionSubHeader from "./ActionSubHeader";
 import "../../styles/actions/addClient.css";
 
 class AddClient extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       firstName: "",
       surname: "",
       country: "",
       owner: "",
+      owners: this.props.owners,
       alert: false,
       alertText: "",
     };
@@ -58,7 +60,6 @@ class AddClient extends Component {
 
   handleAddClient = () => {
     const { firstName, surname, country, owner } = this.state;
-    debugger;
 
     if (
       !this.validateAction(firstName, "firstName") ||
@@ -89,7 +90,16 @@ class AddClient extends Component {
   };
 
   render() {
-    let { firstName, surname, country, owner, alert, alertText } = this.state;
+    const {
+      firstName,
+      surname,
+      country,
+      owner,
+      alert,
+      alertText,
+      owners,
+    } = this.state;
+
     return (
       <div className="add-client-container">
         {alert && <Alert text={alertText} toggleAlert={this.toggleAlert} />}
@@ -109,8 +119,10 @@ class AddClient extends Component {
           handleInputChange={this.handleInputChange}
         />
         <InputWrapper
-          inputType={owner}
           inputTypeString="owner"
+          mapList={owners}
+          id={owners}
+          list={owners}
           handleInputChange={this.handleInputChange}
         />
         <AddNewClientBtn
@@ -122,16 +134,34 @@ class AddClient extends Component {
   }
 }
 
-const InputWrapper = ({ inputType, inputTypeString, handleInputChange }) => {
+const InputWrapper = ({
+  inputType,
+  inputTypeString,
+  handleInputChange,
+  mapList,
+  list,
+  id,
+}) => {
   return (
-    <div style={{ display: "inline-flex", width: "100%" }}>
+    <div className="input-wrapper">
       <Required />
       <ActionSubHeader text={ACTION_HEADERS["add"][inputTypeString]} />
-      <Input
-        name={inputTypeString}
-        value={inputType}
-        onChange={handleInputChange}
-      />
+      {inputTypeString !== "owner" ? (
+        <Input
+          name={inputTypeString}
+          value={inputType}
+          onChange={handleInputChange}
+        />
+      ) : (
+        <Datalist
+          isAddClient="true"
+          list={list}
+          id={id}
+          mapList={mapList}
+          name={inputTypeString}
+          onChange={handleInputChange}
+        />
+      )}
     </div>
   );
 };

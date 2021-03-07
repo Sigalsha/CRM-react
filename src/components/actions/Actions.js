@@ -39,7 +39,7 @@ class Actions extends Component {
     }, 1000); */
   }
 
-  async getClientsFromServer() {
+  getClientsFromServer() {
     axios
       .get(URL)
       .then((res) => {
@@ -145,6 +145,7 @@ class Actions extends Component {
 
   render() {
     const { loading, clients, owners, emailType, currentClient } = this.state;
+    console.log("owners from actions", owners);
 
     if (loading) {
       return (
@@ -182,7 +183,7 @@ class Actions extends Component {
           <ActionHeader text={ACTION_HEADERS["main"]["addClient"]} />
         </div>
         <div className="actions-child">
-          <AddClient addNewClient={this.addNewClient} />
+          <AddClient addNewClient={this.addNewClient} owners={owners} />
         </div>
       </div>
     );

@@ -6,6 +6,16 @@
   padding-bottom: 2%;
 }
 
+.datalist-add-client {
+  width: 40%;
+  background-color: transparent;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: lightgray;
+  color: black;
+  margin-top: 1%;
+}
+
 .input-text {
   width: 100%;
   text-align: center;
@@ -15,8 +25,23 @@
   border-color: lightgray;
 }
 
+.input-text-add-client {
+  border: none;
+  width: 100%;
+}
+
 @media screen and (max-width: 700px) {
   .datalist-wrapper {
     width: 35%;
+  }
+
+  .datalist-add-client {
+    margin-top: 1.5%;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .datalist-add-client {
+    width: 50%;
   }
 }

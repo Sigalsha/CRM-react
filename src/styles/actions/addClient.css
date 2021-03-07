@@ -10,6 +10,11 @@
   color: black;
 }
 
+.input-wrapper {
+  display: inline-flex;
+  width: 100%;
+}
+
 .input-add-client {
   width: 40%;
   background-color: transparent;
