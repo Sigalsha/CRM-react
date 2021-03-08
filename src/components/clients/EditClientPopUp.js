@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/clients/editClientPopUp.css";
 class EditClientPopUp extends Component {
   state = {
@@ -41,7 +43,7 @@ class EditClientPopUp extends Component {
       <div className="popup-wrapper">
         <div className="popup-container" id={clientToEdit.id}>
           <div className="exit-btn" onClick={toggleEditClient}>
-            X
+            <FontAwesomeIcon icon={faTimes} />
           </div>
           <div className="popup-row">
             <span>Name:</span>
