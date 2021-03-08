@@ -1,5 +1,5 @@
 .add-client-container {
-  width: 60%;
+  width: 80%;
   margin-left: 2%;
   padding: 1%;
   display: flex;
@@ -13,6 +13,7 @@
 .input-wrapper {
   display: inline-flex;
   width: 100%;
+  align-items: center;
 }
 
 .input-add-client {
@@ -26,7 +27,7 @@
 }
 
 .add-new-client-btn {
-  width: 40%;
+  width: 67%;
   height: 40px;
   padding-top: 10px;
   background-color: #f7ce3e;
@@ -34,7 +35,7 @@
   font-weight: bold;
   font-size: 1em;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 35px;
 }
 
 .add-new-client-btn:hover {
@@ -43,19 +44,18 @@
 
 @media screen and (min-width: 1023px) {
   .add-client-container {
+    width: 60%;
     padding-top: 0;
-    width: 40%;
   }
 
   .add-new-client-btn {
-    width: 50%;
     margin-top: 40px;
   }
 }
 
 @media screen and (max-width: 700px) {
   .add-client-container {
-    width: 90%;
+    width: 80%;
   }
 
   .input-add-client {
@@ -63,8 +63,8 @@
   }
 
   .add-new-client-btn {
-    width: 50%;
-    margin-top: 40px;
+    width: 72%;
+    margin-top: 30px;
   }
 }
 
@@ -79,7 +79,6 @@
   }
 
   .add-new-client-btn {
-    width: 85%;
     font-size: 1.3em;
     height: 50px;
   }

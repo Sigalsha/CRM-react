@@ -1,8 +1,8 @@
 .datalist-wrapper {
-  width: 30%;
+  width: 25%;
   border-color: lightgray;
   text-align: center;
-  margin-left: 2%;
+  margin-left: 5%;
   padding-bottom: 2%;
 }
 
@@ -30,9 +30,15 @@
   width: 100%;
 }
 
+@media screen and (min-width: 1023px) {
+  .datalist-wrapper {
+    margin-left: 1%;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .datalist-wrapper {
-    width: 35%;
+    width: 30%;
   }
 
   .datalist-add-client {

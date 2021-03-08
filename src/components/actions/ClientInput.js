@@ -30,8 +30,10 @@ class ClientInput extends Component {
 
     return (
       <div className="client-input-container">
-        <Required isClient="true" />
-        <ActionSubHeader text={ACTION_HEADERS["update"]["client"]} />
+        <div className="client-input-header">
+          <Required isClient="true" />
+          <ActionSubHeader text={ACTION_HEADERS["update"]["client"]} />
+        </div>
         <Datalist
           list={clients}
           placeholder="Client Name"
@@ -46,29 +48,3 @@ class ClientInput extends Component {
 }
 
 export default ClientInput;
-
-/* const ClientInput = ({ clients, getCurrentClient }) => {
-  function handleChange(event) {
-    getCurrentClient(event);
-  }
-
-  return (
-    <div className="client-input-container">
-      <div className="update-header">Client:</div>
-      <input
-        className="input-client-name"
-        type="text"
-        list="clients"
-        placeholder="Client Name"
-        onChange={handleChange}
-      />
-      <datalist id="clients">
-        {clients.map((client) => (
-          <option value={client.name} key={client._id} />
-        ))}
-      </datalist>
-    </div>
-  );
-}; */
-
-/* export default ClientInput; */

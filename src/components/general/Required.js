@@ -7,7 +7,7 @@ const Required = ({ isClient }) => {
   return (
     <FontAwesomeIcon
       icon={faAsterisk}
-      className={isClient ? "main client-input" : "main add-client"}
+      className={`main ${isClient ? "client-input" : ""}`}
     />
   );
 };

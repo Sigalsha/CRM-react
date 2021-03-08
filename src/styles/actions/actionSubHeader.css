@@ -3,18 +3,8 @@
   margin-top: 1%;
 }
 
-.add-client-header {
-  width: 35%;
-  background-color: transparent;
-  margin-top: 1%;
-}
-
 @media screen and (max-width: 700px) {
   .update-header {
     width: 30%;
-  }
-
-  .add-client-header {
-    margin-top: 1.5%;
   }
 }

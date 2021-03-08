@@ -1,5 +1,5 @@
 .client-input-container {
-  width: 70%;
+  width: 90%;
   display: flex;
   text-align: left;
   justify-content: flex-start;
@@ -10,18 +10,16 @@
   letter-spacing: normal;
 }
 
-.input-client-name {
-  width: 35%;
-  background-color: transparent;
-  border-style: solid;
-  border-width: 0px 0px 1px 0px;
-  border-color: lightgray;
-  text-align: center;
-  margin-left: 5%;
+.client-input-header {
+  display: inline-flex;
+  width: 25%;
+  align-items: center;
+  margin-top: 1%;
 }
 
 @media screen and (min-width: 1023px) {
   .client-input-container {
+    width: 70%;
     padding-top: 0;
     margin: 0.5% 1% 0.5% 2%;
   }
@@ -29,17 +27,16 @@
 
 @media screen and (max-width: 700px) {
   .client-input-container {
-    width: 90%;
+    width: 100%;
   }
 
-  .input-client-name {
-    width: 35%;
+  .client-input-header {
+    width: 30%;
   }
 }
 
 @media screen and (max-width: 415px) {
   .client-input-container {
     margin-top: 20px;
-    width: 95%;
   }
 }

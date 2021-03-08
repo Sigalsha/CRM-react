@@ -117,10 +117,7 @@ class UpdateClient extends Component {
     return (
       <div className="update-client-container">
         {alert && <Alert text={alertText} toggleAlert={this.toggleAlert} />}
-        <ActionSubHeader
-          headerType="update"
-          text={ACTION_HEADERS["update"]["transferOwnership"]}
-        />
+        <ActionSubHeader text={ACTION_HEADERS["update"]["transferOwnership"]} />
         <Datalist
           list={owners}
           placeholder="Owner"
@@ -134,10 +131,7 @@ class UpdateClient extends Component {
           text={ACTIONS_BUTTONS["update"]["transfer"]}
         />
 
-        <ActionSubHeader
-          headerType="update"
-          text={ACTION_HEADERS["update"]["sendEmail"]}
-        />
+        <ActionSubHeader text={ACTION_HEADERS["update"]["sendEmail"]} />
         <Datalist
           list={emailTypes}
           placeholder="Email Type"
@@ -151,10 +145,7 @@ class UpdateClient extends Component {
           text={ACTIONS_BUTTONS["update"]["send"]}
         />
 
-        <ActionSubHeader
-          headerType="update"
-          text={ACTION_HEADERS["update"]["declareSale"]}
-        />
+        <ActionSubHeader text={ACTION_HEADERS["update"]["declareSale"]} />
         <div className="empty-div" />
         <UpdateButton
           onClick={this.declareSold}
