@@ -3,7 +3,7 @@ import "../../styles/clients/editClientPopUp.css";
 class EditClientPopUp extends Component {
   state = {
     firstName: this.props.clientToEdit.name.split(" ")[0],
-    sureName: this.props.clientToEdit.name.split(" ")[1],
+    surname: this.props.clientToEdit.name.split(" ")[1],
     country: this.props.clientToEdit.country,
   };
 
@@ -22,11 +22,11 @@ class EditClientPopUp extends Component {
 
   handleSubmit = () => {
     const { submitInputChange, clientToEdit } = this.props;
-    let { firstName, sureName, country } = this.state;
+    let { firstName, surname, country } = this.state;
 
     const clientToUpdate = {
       name:
-        firstName && sureName ? `${firstName} ${sureName}` : clientToEdit.name,
+        firstName && surname ? `${firstName} ${surname}` : clientToEdit.name,
       country: country ? country : clientToEdit.country,
     };
 
@@ -34,7 +34,7 @@ class EditClientPopUp extends Component {
   };
 
   render() {
-    const { firstName, sureName, country } = this.state;
+    const { firstName, surname, country } = this.state;
     const { toggleEditClient, clientToEdit } = this.props;
 
     return (
@@ -54,12 +54,12 @@ class EditClientPopUp extends Component {
             />
           </div>
           <div className="popup-row">
-            <span>Surename:</span>
+            <span>surname:</span>
             <input
               className="popup-input"
               type="text"
-              name="sureName"
-              value={sureName}
+              name="surname"
+              value={surname}
               onChange={this.handleInputChange}
             />
           </div>

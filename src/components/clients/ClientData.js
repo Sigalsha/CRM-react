@@ -33,7 +33,7 @@ class ClientData extends Component {
       firstContact,
     } = this.props;
     let fixedName = name.split(" ")[0];
-    let sureName = name.split(" ")[1];
+    let surname = name.split(" ")[1];
     let formatFirstContact = firstContact.split("T")[0];
 
     return (
@@ -44,7 +44,7 @@ class ClientData extends Component {
           onClick={this.generateClientToEdit}
         >
           <td className="rowItem">{fixedName}</td>
-          <td className="rowItem">{sureName}</td>
+          <td className="rowItem">{surname}</td>
           <td className="rowItem">{country}</td>
           <td className="rowItem">{formatFirstContact}</td>
           <td className="rowItem">{emailType}</td>
