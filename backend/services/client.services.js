@@ -111,6 +111,8 @@ exports.addNewClient = async function({ name, owner, country }) {
       emailType: null,
     });
 
+    console.log("newClient in service", newClient);
+
     newClient.save((err, data) => {
       if (err) {
         console.log(

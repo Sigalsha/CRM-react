@@ -54,7 +54,7 @@ exports.addNewClient = async function(req, res, next) {
       country,
     });
 
-    console.log("new client ", newClient);
+    console.log("new client in controller, from service", newClient);
 
     return res.status(200).json({
       status: 200,
