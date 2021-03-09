@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { NAV_LINKS } from "../../utils/consts";
 import "../../styles/general/landing.css";
 class Landing extends Component {
   render() {
@@ -9,9 +10,9 @@ class Landing extends Component {
           <span>CRM - manage your success</span>
         </div>
         <div className="landing-links-wrapper">
-          <LinkContainer path={"/clients"} text={`Clients`} />
-          <LinkContainer path={"/actions"} text={`Actions`} />
-          <LinkContainer path={"/analytics"} text={`Analytics`} />
+          <LinkContainer path={"/clients"} text={NAV_LINKS["clients"]} />
+          <LinkContainer path={"/actions"} text={NAV_LINKS["actions"]} />
+          <LinkContainer path={"/analytics"} text={NAV_LINKS["analytics"]} />
         </div>
       </div>
     );

@@ -30,6 +30,16 @@
   background-color: rgba(169, 169, 169, 0.2);
 }
 
+.nav-link:active {
+  color: #f7ce3e;
+  background-color: rgba(169, 169, 169, 0.2);
+}
+
+.nav-link-active {
+  color: #f7ce3e;
+  background-color: rgba(169, 169, 169, 0.2);
+}
+
 @media screen and (max-width: 400px) {
   #navbar-container {
     text-align: start;

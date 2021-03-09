@@ -1,5 +1,12 @@
 export const URL = "http://localhost:8100/clients/";
 
+export const NAV_LINKS = {
+  home: "Home",
+  clients: "Clients",
+  actions: "Actions",
+  analytics: "Analytics",
+};
+
 export const CLIENTS_HEADERS = {
   name: "name",
   surname: "name",
