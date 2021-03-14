@@ -53,8 +53,10 @@ exports.addNewClient = async function(req, res, next) {
       owner,
       country,
     });
+    console.log("new client in ctrl, from db ", newClient);
 
-    console.log("new client in controller, from service", newClient);
+    /*     const newSavedClient = await ClientService.getClient({ name });
+    console.log("newSavedClient in ctrl ", newSavedClient); */
 
     return res.status(200).json({
       status: 200,

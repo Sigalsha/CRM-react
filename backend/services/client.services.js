@@ -49,6 +49,16 @@ exports.getClients = async function(data) {
   }
 };
 
+/* exports.getClient = async function({ name }) {
+  try {
+    const client = await Client.findOne({ name: name });
+    console.log("found client in db ", client);
+    return client;
+  } catch (err) {
+    return (err = "Error while trying to find client in db");
+  }
+}; */
+
 exports.updateClient = async function(updatedC) {
   console.log("req params/body from ctrl - updateClient ", updatedC);
 
@@ -125,10 +135,9 @@ exports.addNewClient = async function({ name, owner, country }) {
         );
         return err;
       }
-
       console.log("new client was saved to db: ", data);
-      return data;
     });
+    return newClient;
   } catch (err) {
     return (err = "Error while trying to save new client to db");
   }
