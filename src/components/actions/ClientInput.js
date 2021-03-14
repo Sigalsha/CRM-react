@@ -14,6 +14,15 @@ class ClientInput extends Component {
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.clients !== state.clients) {
+      return { clients: props.clients };
+    }
+
+    // Return null if the state hasn't changed
+    return null;
+  }
+
   handleChange = (event) => {
     const { value } = event.target;
     const { currentClient } = this.state;
@@ -27,6 +36,7 @@ class ClientInput extends Component {
     const { clients, currentClient } = this.state;
 
     console.log("current client from client input", currentClient);
+    console.log("clients from client input", clients);
 
     return (
       <div className="client-input-container">

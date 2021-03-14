@@ -7,7 +7,6 @@ import {
   faUserPlus,
   faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
-// import call from "../../ApiCalls/ApiCalls";
 import utils from "../../utils/utils";
 import { URL, COLORS } from "../../utils/consts";
 import "../../styles/analytics/analytics.css";
@@ -37,14 +36,6 @@ class Analytics extends Component {
       .catch((err) => {
         console.log("err from clients backend: ", err);
       });
-
-    /*     setTimeout(() => {
-      let data = call.getClients();
-      this.setState({
-        loading: false,
-        clients: data,
-      });
-    }, 1000); */
   }
 
   getBadges = () => {

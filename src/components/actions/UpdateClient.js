@@ -40,15 +40,25 @@ class UpdateClient extends Component {
     return;
   }; */
 
+  resetInputes = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+  };
+
   changeOwner = () => {
     const { owner } = this.state;
     const { currentClient, updateClient } = this.props;
 
     if (!currentClient) {
-      this.setState({
-        alertText: ACTIONS_ALERTS["update"]["currentClient"],
-        alert: true,
-      });
+      this.setState(
+        {
+          alertText: ACTIONS_ALERTS["update"]["currentClient"],
+          alert: true,
+          owner: "",
+        },
+        this.resetInputes()
+      );
       return;
     }
 
@@ -57,10 +67,12 @@ class UpdateClient extends Component {
         alertText: ACTIONS_ALERTS["update"]["owner"],
         alert: true,
       });
+      console.log("current client", this.props.currentClient);
+
       return;
     }
 
-    updateClient({ id: currentClient._id, owner });
+    updateClient({ id: currentClient._id, owner }, this.resetInputes());
   };
 
   changeEmailType = () => {
@@ -68,10 +80,10 @@ class UpdateClient extends Component {
     const { currentClient, updateClient } = this.props;
 
     if (!currentClient) {
-      this.setState({
-        alertText: ACTIONS_ALERTS["update"]["currentClient"],
-        alert: true,
-      });
+      this.setState(
+        { alertText: ACTIONS_ALERTS["update"]["currentClient"], alert: true },
+        this.resetInputes()
+      );
       return;
     }
 
@@ -83,27 +95,27 @@ class UpdateClient extends Component {
       return;
     }
 
-    updateClient({ id: currentClient._id, emailType });
+    updateClient({ id: currentClient._id, emailType }, this.resetInputes());
   };
 
   declareSold = () => {
     const { currentClient, updateClient } = this.props;
 
     if (currentClient && currentClient.sold) {
-      this.setState({
-        alertText: ACTIONS_ALERTS["update"]["declareSale"],
-        alert: true,
-      });
+      this.setState(
+        { alertText: ACTIONS_ALERTS["update"]["declareSale"], alert: true },
+        this.resetInputes()
+      );
       return;
     } else {
       if (!currentClient) {
-        this.setState({
-          alertText: ACTIONS_ALERTS["update"]["currentClient"],
-          alert: true,
-        });
+        this.setState(
+          { alertText: ACTIONS_ALERTS["update"]["currentClient"], alert: true },
+          this.resetInputes()
+        );
         return;
       }
-      updateClient({ id: currentClient._id, sold: true });
+      updateClient({ id: currentClient._id, sold: true }, this.resetInputes());
     }
   };
 
@@ -125,6 +137,7 @@ class UpdateClient extends Component {
           mapList={owners}
           name="owner"
           onChange={this.handleInputChange}
+          onFocuse={this.onFocus}
         />
         <UpdateButton
           onClick={this.changeOwner}

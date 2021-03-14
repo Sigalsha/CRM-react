@@ -28,6 +28,7 @@
 .input-text-add-client {
   border: none;
   width: 100%;
+  text-align: start;
 }
 
 @media screen and (min-width: 1023px) {

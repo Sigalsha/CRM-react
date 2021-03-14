@@ -116,14 +116,14 @@ class Actions extends Component {
         console.log("err from update client (put) backend ", err)
       );
 
-    this.setState({ currentClient: { ...currentClient, ...updatedClient } });
+    this.setState({ currentClient: "" }, this.getClientsFromServer);
 
     // this.sendUpdatedClient(client, updatedClient)
   };
 
   addNewClient = (newClient) => {
     const { clients } = this.state;
-    debugger;
+    // debugger;
     axios
       .post(`${URL}add`, newClient)
       .then((res) => {
@@ -139,13 +139,12 @@ class Actions extends Component {
       },
       this.getClientsFromServer
     );
-    //should get the client from the server with an Id, than update it in the state?
+    //should get the client from the server with an Id, then update it in the state?
     //Or get all the clients including the new client
   };
 
   render() {
     const { loading, clients, owners, emailType, currentClient } = this.state;
-    console.log("owners from actions", owners);
 
     if (loading) {
       return (

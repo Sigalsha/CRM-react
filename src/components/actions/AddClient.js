@@ -58,6 +58,12 @@ class AddClient extends Component {
     this.setState({ alert: !alert });
   };
 
+  resetInputes = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+  };
+
   handleAddClient = () => {
     const { firstName, surname, country, owner } = this.state;
 
@@ -81,12 +87,10 @@ class AddClient extends Component {
     }
 
     this.props.addNewClient(newClient);
-    this.setState({
-      firstName: "",
-      surname: "",
-      country: "",
-      owner: "",
-    });
+    this.setState(
+      { firstName: "", surname: "", country: "", owner: "" },
+      this.resetInputes
+    );
   };
 
   render() {
@@ -94,7 +98,6 @@ class AddClient extends Component {
       firstName,
       surname,
       country,
-      owner,
       alert,
       alertText,
       owners,
