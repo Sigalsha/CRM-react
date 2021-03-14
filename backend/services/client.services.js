@@ -116,7 +116,7 @@ exports.addNewClient = async function({ name, owner, country }) {
       name,
       owner,
       country,
-      firstContact: new Date(),
+      firstContact: new Date().toISOString(),
       sold: false,
       emailType: null,
     });
