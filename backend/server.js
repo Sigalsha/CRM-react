@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const api = require("./routes/api.js");
 const app = express();
 require("dotenv/config");
+const path = require("path");
+const pug = require("pug");
 const ClientService = require("./services/client.services");
 const ClientModel = require("./models/ClientModel");
 
@@ -51,7 +53,12 @@ app.use(function(req, res, next) {
 
   next();
 }); */
-
+// view engine setup
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+/* app.use((req, res, next) => {
+  res.status(404).send("Sorry can't find that!");
+}); */
 app.use("/", api);
 
 app.listen(PORT, () => {
