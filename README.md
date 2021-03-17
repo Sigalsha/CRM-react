@@ -14,4 +14,4 @@ Perform actions regarding your clients, such as adding a new client, changing cl
 
 View clients and sales stats
 
-## please visit: https://sigalsha.github.io/CRM-react/
+## For client-side only, please visit: https://sigalsha.github.io/CRM-react/
