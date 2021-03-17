@@ -1,6 +1,6 @@
 # CRM-react
 
-A customer relationship management platform build with ReactJS.
+A customer relationship management platform built with ReactJS.
 
 ## Clients
 
