@@ -58,12 +58,15 @@ exports.addNewClient = async function(req, res, next) {
     /*     const newSavedClient = await ClientService.getClient({ name });
     console.log("newSavedClient in ctrl ", newSavedClient); */
 
-    return res.status(200).json({
+    res.status(200).json({
       status: 200,
       data: newClient,
       message: "new client was succesfully added",
     });
   } catch (err) {
-    return res.status(400).json({ status: 400, message: err });
+    console.log(err);
+    res.status(500).json({
+      error: err,
+    });
   }
 };

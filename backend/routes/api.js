@@ -4,10 +4,19 @@ const fs = require("fs");
 const Promise = require("bluebird");
 Promise.promisifyAll(fs);
 const Client = require("../models/ClientModel.js");
-const ClientController = require("../controllers/client.controllers");
+const {
+  getClients,
+  addNewClient,
+  updateClient,
+} = require("../controllers/client.controllers");
+
+const {
+  updateClientValidator,
+  addNewClientValidator,
+} = require("../helpers/index");
 
 //GET - get all the clients form DB:
-router.get("/clients", ClientController.getClients);
+router.get("/clients", getClients);
 
 /* router.get("/clients", async function(req, res) {
      Client.find((err, data) => {
@@ -20,10 +29,10 @@ router.get("/clients", ClientController.getClients);
 }); */
 
 // POST - add new client
-router.post("/clients/add", ClientController.addNewClient);
+router.post("/clients/add", [addNewClientValidator], addNewClient);
 
 //PUT - find client by id and update client's details:
-router.put("/clients/:id", ClientController.updateClient);
+router.put("/clients/:id", [updateClientValidator], updateClient);
 
 /*router.put("/clients", function(req, res) {
   let { id, name, country } = req.body;
@@ -41,6 +50,11 @@ router.put("/clients/:id", ClientController.updateClient);
     }
   );
 });*/
+
+router.get("/error", (error, req, res) => {
+  res.status(500);
+  res.render("500.pug", { title: "500: Internal Server Error", error: error });
+});
 
 router.get("*", (req, res) => {
   res.status(404);

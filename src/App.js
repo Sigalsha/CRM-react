@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import { COLORS } from "./utils/consts";
 import Navbar from "./components/general/Navbar.js";
