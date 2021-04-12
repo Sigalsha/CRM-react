@@ -6,7 +6,7 @@ const clientSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    trime: true,
+    trim: true,
     minlength: 3,
   },
   email: { type: String },
