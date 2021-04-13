@@ -1,30 +1,30 @@
 self.__precacheManifest = [
   {
-    "revision": "04a301db5fac6600395b",
-    "url": "/CRM-react/static/css/main.807ae2eb.chunk.css"
+    "revision": "459863ba194d13f745f8",
+    "url": "/CRM-react/static/css/main.51269c70.chunk.css"
   },
   {
-    "revision": "04a301db5fac6600395b",
-    "url": "/CRM-react/static/js/main.99e02bf5.chunk.js"
+    "revision": "459863ba194d13f745f8",
+    "url": "/CRM-react/static/js/main.76f1f7be.chunk.js"
   },
   {
     "revision": "9133811a8ad339bff0f4",
     "url": "/CRM-react/static/js/runtime~main.545a9d9b.js"
   },
   {
-    "revision": "d93d094bf646296c129d",
+    "revision": "808d9f9036f15cb56669",
     "url": "/CRM-react/static/css/2.28ce997e.chunk.css"
   },
   {
-    "revision": "d93d094bf646296c129d",
-    "url": "/CRM-react/static/js/2.cb0f726e.chunk.js"
+    "revision": "808d9f9036f15cb56669",
+    "url": "/CRM-react/static/js/2.7ae9da5a.chunk.js"
   },
   {
     "revision": "5683fffe13da4622872fde1857907f9a",
     "url": "/CRM-react/static/media/businesswoman-2817567_1280.5683fffe.jpg"
   },
   {
-    "revision": "7e8ede4e3d44963114ca8d50f07b3204",
+    "revision": "6d85a0c5810748b845b1a32dbc165105",
     "url": "/CRM-react/index.html"
   }
 ];
