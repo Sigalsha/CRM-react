@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 import Loader from "react-loader-spinner";
 import { COLORS } from "./utils/consts";
+import store from "./store";
 import Navbar from "./components/general/Navbar.js";
 import Landing from "./components/general/Landing.js";
 import Clients from "./components/clients/Clients.js";
@@ -12,12 +14,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loading: true,
+      loading: true
     };
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState({ loading: false }), 1000);
+    // setTimeout(() => this.setState({ loading: false }), 1000);
+    // store.dispatch(loadUser());
   }
   // componentDidMount = async ()=> {
   //   const state = await JSON.parse(localStorage.getItem('state'))
@@ -58,19 +61,21 @@ class App extends Component {
     }
 
     return (
-      <Router>
-        <div className="app">
-          <div className="general">
-            <Navbar />
+      <Provider store={store}>
+        <Router>
+          <div className="app">
+            <div className="general">
+              <Navbar />
+            </div>
+            <div>
+              <Route path="/" exact component={Landing} />
+              <Route path="/clients" exact component={Clients} />
+              <Route path="/actions" exact component={Actions} />
+              <Route path="/analytics" exact component={Analytics} />
+            </div>
           </div>
-          <div>
-            <Route path="/" exact component={Landing} />
-            <Route path="/clients" exact component={Clients} />
-            <Route path="/actions" exact component={Actions} />
-            <Route path="/analytics" exact component={Analytics} />
-          </div>
-        </div>
-      </Router>
+        </Router>
+      </Provider>
     );
   }
 }

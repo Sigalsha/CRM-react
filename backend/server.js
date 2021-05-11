@@ -1,10 +1,9 @@
+require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const api = require("./routes/api.js");
+const api = require("./routes/api");
 const app = express();
-require("dotenv/config");
 const path = require("path");
 const pug = require("pug");
 // import expressValidator from "express-validator";
@@ -14,15 +13,12 @@ const ClientModel = require("./models/ClientModel");
 const PORT = process.env.PORT || 8100;
 const URI = process.env.ATLAS_URI;
 
-mongoose.connect(
-  URI,
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
 const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("MongoDB connection established!");
@@ -42,7 +38,10 @@ connection.once("open", () => {
 app.use(cors());
 /* app.use(express.static("public"));
 app.use(express.static("node_modules")); */
-app.use(bodyParser.json());
+
+// body-parser middleware
+app.use(express.json());
+
 /* app.use(expressValidator); */
 
 /* app.use(bodyParser.urlencoded({ extended: false }));
@@ -62,19 +61,19 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use("/", api);
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   const err = new Error("Not found");
   err.status = 404;
   next(err);
   res.render("404.pug", { title: "404: File Not Found" });
-});
+}); */
 
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.status === 500
     ? res.render("500.pug", {
         title: "500: Internal Server Error",
-        error: error,
+        error: error
       })
     : res.json({ error: error.message });
 });
