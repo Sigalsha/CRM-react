@@ -20,20 +20,35 @@ exports.findUserById = async function (id) {
   }
 };
 
-exports.addNewUser = async function ({ name, email, hashedPassword }) {
+exports.findAllUsers = async function () {
+  console.log("in findAllUsers service");
   try {
-    const newUser = new User({
+    return await User.find();
+  } catch (err) {
+    console.log("err in service, while trying to find all users");
+    return (err = "Error in service while trying to find all users");
+  }
+};
+
+exports.addNewUser = async function ({ name, email, hash }) {
+  console.log("params from /register ", { name, email, hash });
+  try {
+    const newUser = await new User({
       name,
       email,
-      password: hashedPassword
+      password: hash
     });
-    newUser.save((err) => {
-      console.log("err from service, while trying to find user");
-      if (err) return err;
+
+    newUser.save((err, data) => {
+      if (err) {
+        console.log("err from service, while trying to save a new user");
+        return err;
+      }
+      console.log("new user was saved to db: ", data);
     });
-    return newClient;
+    return newUser;
   } catch (err) {
     console.log("err from service, while trying to add a new user");
-    return (err = "Error while trying to save new user to db");
+    return (err = "Error while trying to save a new user to db");
   }
 };

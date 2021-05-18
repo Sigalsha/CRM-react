@@ -1,5 +1,4 @@
 const ClientService = require("../services/client.services");
-const Client = require("../models/ClientModel");
 
 exports.getClients = async function (req, res, next) {
   try {
